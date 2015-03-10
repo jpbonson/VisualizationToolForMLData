@@ -1,0 +1,73 @@
+/* Overall website */
+
+body {
+        color: #000;
+        font: 12px Verdana, sans-serif;
+      }
+
+#title {
+    margin-top: 0px;
+    height: 30px;
+    font: 45px Impact;
+    font-weight: bold;
+}
+
+#menu {
+    margin-top: 30px;
+    width: 320px;
+    float: left;
+    }
+
+#content {
+    margin-top: 10px;
+    margin-left: 320px;
+    }
+
+/* Chart legend */
+
+.legend text {
+    font: 14px Impact;
+}
+
+/* Scatter matrix chart */
+
+svg {
+  font: 10px sans-serif;
+  padding: 10px;
+}
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.frame {
+  fill: none;
+  stroke: #aaa;
+}
+
+circle {
+  fill-opacity: .7;
+}
+
+circle.hidden {
+  fill: #ccc !important;
+}
+
+.extent {
+  fill: #000;
+  fill-opacity: .125;
+  stroke: #fff;
+}
+
+.histograms-titles {
+  font: 14px Impact;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <script src="static/js/vendor/jquery.js"></script>
+        <script src="static/js/vendor/d3/d3.min.js"  charset="utf-8"></script>
+        <script src="static/js/utils.js"></script>
+        <script src="static/js/scatter_matrix.js"></script>
+        <script src="static/js/legends.js"></script>
+        <script src="static/js/attributes.js"></script>
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
+        <link rel="stylesheet" type="text/css" href="static/css/vendor/button_style.css">
+    </head>
+    <body>
+        <div id="title">
+            <p>Visualization Tool for Data Classification</p>
+        </div>
+        <div id="menu">
+            <div style="float: left; width: 160px;">
+            <fieldset>
+            <legend><h3>Classes:</h3></legend>
+                <div style="overflow-y: auto;overflow-x: hidden;height: 160px; width: 140px;">
+                    <svg id="chart-legends"></svg>
+                </div>
+            </fieldset>
+            </div>
+            <div style="width: 160px;float: left;position:relative;">
+            <fieldset>
+            <legend><h3>Attributes:</h3></legend>
+                <div id="chart-attributes" style="overflow: auto;height: 160px"></div>
+            </fieldset>
+            </div>
+            <div style="clear: left;">
+            <fieldset>
+            <legend><h3>Filter Algorithms:</h3></legend>
+                <input type="checkbox" value="checkbox-filterA">Filter A<br>
+                <input type="checkbox" value="checkbox-filterA">Filter B<br>
+                <input type="checkbox" value="checkbox-filterA">Filter C<br>
+            </fieldset>
+            <a href="#" class="button black" style="margin-top: 20px;">Upload dataset</a>
+            
+            </div>
+        </div>
+        <div id="content">
+            <svg id="scattermatrix" class="" height="1000" width="900" style="position:relative;"></svg>
+        </div>
+    </body>
+    <script>
+        // Global Variables
+        var colors = d3.scale.category10();
+        var data_file = "{{ data_file }}"
+        var matrix_id = "#scattermatrix"
+        var columns_mask = initialize_columns_mask()
+
+        // Initialize Dynamic Content
+        chart_scatter_matrix(matrix_id);
+        chart_legends("#chart-legends");
+        chart_attributes("#chart-attributes", matrix_id);
+    </script>
+</html>
