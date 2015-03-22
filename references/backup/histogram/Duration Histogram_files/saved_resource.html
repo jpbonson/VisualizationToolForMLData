@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)http://bl.ocks.org/mbostock/raw/3048166/46bb2a235a4c2f8930c11974771e6409847fcbd2/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
+}
+
+.bar text {
+  fill: #fff;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<style type="text/css"></style></head><body marginwidth="0" marginheight="0">
+<script src="d3.v2.min.js"></script>
+<script>
+
+// Generate a log-normal distribution with a median of 30 minutes.
+var values = d3.range(1000).map(d3.random.logNormal(Math.log(30), .4));
+
+// Formatters for counts and times (converting numbers to Dates).
+var formatCount = d3.format(",.0f"),
+    formatTime = d3.time.format("%H:%M"),
+    formatMinutes = function(d) { return formatTime(new Date(2012, 0, 1, 0, d)); };
+
+var margin = {top: 10, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x = d3.scale.linear()
+    .domain([0, 120])
+    .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+
+var y = d3.scale.linear()
+    .domain([0, d3.max(data, function(d) { return d.y; })])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom")
+    .tickFormat(formatMinutes);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", x(data[0].dx) - 1)
+    .attr("height", function(d) { return height - y(d.y); });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", 6)
+    .attr("x", x(data[0].dx) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+</script><svg width="960" height="500"><g transform="translate(30,10)"><g class="bar" transform="translate(0,460)"><rect x="1" width="36.5" height="0"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">0</text></g><g class="bar" transform="translate(37.5,451.6867469879518)"><rect x="1" width="36.5" height="8.313253012048222"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">3</text></g><g class="bar" transform="translate(75,329.7590361445783)"><rect x="1" width="36.5" height="130.24096385542168"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">47</text></g><g class="bar" transform="translate(112.5,119.15662650602411)"><rect x="1" width="36.5" height="340.8433734939759"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">123</text></g><g class="bar" transform="translate(150,27.710843373493958)"><rect x="1" width="36.5" height="432.28915662650604"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">156</text></g><g class="bar" transform="translate(187.5,0)"><rect x="1" width="36.5" height="460"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">166</text></g><g class="bar" transform="translate(225,58.19277108433732)"><rect x="1" width="36.5" height="401.8072289156627"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">145</text></g><g class="bar" transform="translate(262.5,91.4457831325301)"><rect x="1" width="36.5" height="368.5542168674699"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">133</text></g><g class="bar" transform="translate(300,282.6506024096385)"><rect x="1" width="36.5" height="177.3493975903615"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">64</text></g><g class="bar" transform="translate(337.5,285.4216867469879)"><rect x="1" width="36.5" height="174.57831325301208"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">63</text></g><g class="bar" transform="translate(375,363.0120481927711)"><rect x="1" width="36.5" height="96.98795180722891"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">35</text></g><g class="bar" transform="translate(412.5,396.26506024096386)"><rect x="1" width="36.5" height="63.73493975903614"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">23</text></g><g class="bar" transform="translate(450,415.66265060240966)"><rect x="1" width="36.5" height="44.337349397590344"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">16</text></g><g class="bar" transform="translate(487.49999999999994,443.3734939759036)"><rect x="1" width="36.5" height="16.626506024096386"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">6</text></g><g class="bar" transform="translate(525,440.6024096385542)"><rect x="1" width="36.5" height="19.397590361445793"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">7</text></g><g class="bar" transform="translate(562.5,448.9156626506024)"><rect x="1" width="36.5" height="11.084337349397572"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">4</text></g><g class="bar" transform="translate(600,454.4578313253012)"><rect x="1" width="36.5" height="5.542168674698814"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">2</text></g><g class="bar" transform="translate(637.5,451.6867469879518)"><rect x="1" width="36.5" height="8.313253012048222"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">3</text></g><g class="bar" transform="translate(675,457.2289156626506)"><rect x="1" width="36.5" height="2.771084337349407"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">1</text></g><g class="bar" transform="translate(712.5,457.2289156626506)"><rect x="1" width="36.5" height="2.771084337349407"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">1</text></g><g class="bar" transform="translate(750,460)"><rect x="1" width="36.5" height="0"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">0</text></g><g class="bar" transform="translate(787.5,460)"><rect x="1" width="36.5" height="0"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">0</text></g><g class="bar" transform="translate(825,457.2289156626506)"><rect x="1" width="36.5" height="2.771084337349407"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">1</text></g><g class="bar" transform="translate(862.5,457.2289156626506)"><rect x="1" width="36.5" height="2.771084337349407"></rect><text dy=".75em" y="6" x="18.75" text-anchor="middle">1</text></g><g class="x axis" transform="translate(0,460)"><g transform="translate(0,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">00:00</text></g><g transform="translate(75,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">00:10</text></g><g transform="translate(150,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">00:20</text></g><g transform="translate(225,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">00:30</text></g><g transform="translate(300,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">00:40</text></g><g transform="translate(375,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">00:50</text></g><g transform="translate(450,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">01:00</text></g><g transform="translate(525,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">01:10</text></g><g transform="translate(600,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">01:20</text></g><g transform="translate(675,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">01:30</text></g><g transform="translate(750,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">01:40</text></g><g transform="translate(825,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">01:50</text></g><g transform="translate(900,0)" style="opacity: 1;"><line class="tick" y2="6" x2="0"></line><text y="9" x="0" dy=".71em" text-anchor="middle">02:00</text></g><path class="domain" d="M0,6V0H900V6"></path></g></g></svg></body></html>

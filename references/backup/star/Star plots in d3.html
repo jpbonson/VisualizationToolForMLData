@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://bl.ocks.org/kevinschaul/8213691 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>Star plots in d3</title>
+<link rel="icon" href="http://bl.ocks.org/favicon.png">
+<style>
+
+@import url("/style.css?20120730");
+
+header,
+footer {
+  color: #555;
+}
+
+a.gist {
+  color: #000;
+}
+
+</style>
+
+<style type="text/css"></style></head><body><header>
+  <a href="http://bl.ocks.org/kevinschaul">kevinschaul</a>’s block
+  <a class="gist" title="View gist #8213691 on GitHub" href="https://gist.github.com/kevinschaul/8213691">#8213691</a>
+  <span class="date">January 2, 2014</span>
+</header>
+
+<h1>Star plots in d3</h1>
+
+
+<iframe src="./Star plots in d3_files/saved_resource.html" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<p></p><aside><a style="position:relative;top:6px;" href="http://bl.ocks.org/kevinschaul/raw/8213691/" target="_blank">Open in a new window.</a></aside>
+
+
+<div class="gist-readme"><p>Example for <a href="https://github.com/kevinschaul/d3-star-plot">d3-star-plot</a></p>
+
+<p>Data source: <a href="https://www.mathstat.strath.ac.uk/outreach/nessie/nessie_whisky.html">https://www.mathstat.strath.ac.uk/outreach/nessie/nessie_whisky.html</a></p></div>
+
+<div class="gist-sources"><div class="gist-source"><h2>index.html<a name="index.html" href="http://bl.ocks.org/kevinschaul/8213691#index.html">#</a></h2><pre><code class="html xml"><span class="doctype">&lt;!DOCTYPE&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+
+<span class="tag">body</span> <span class="rules">{
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">960</span>px</span>;</span>
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span>;</span>
+  <span class="rule"><span class="attribute">font-family</span>:<span class="value"> Arial</span>;</span>
+<span class="rule">}</span></span>
+<span class="id">#target</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">40</span>px <span class="number">0</span></span>;</span>
+<span class="rule">}</span></span>
+<span class="class">.chart</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"> <span class="number">40</span>px</span>;</span>
+<span class="rule">}</span></span>
+<span class="class">.star-title</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">14</span>px</span>;</span>
+<span class="rule">}</span></span>
+<span class="class">.star-label</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">11</span>px</span>;</span>
+<span class="rule">}</span></span>
+<span class="class">.star-origin</span> <span class="rules">{
+  <span class="rule"><span class="attribute">fill</span>:<span class="value"> <span class="number">#333</span></span>;</span>
+<span class="rule">}</span></span>
+<span class="class">.star-axis</span> <span class="rules">{
+  <span class="rule"><span class="attribute">stroke</span>:<span class="value"> <span class="hexcolor">#ccc</span></span>;</span>
+  <span class="rule"><span class="attribute">stroke-width</span>:<span class="value"> <span class="number">2</span>px</span>;</span>
+  <span class="rule"><span class="attribute">stroke-dasharray</span>:<span class="value"> <span class="number">4</span> <span class="number">5</span></span>;</span>
+<span class="rule">}</span></span>
+<span class="class">.star-path</span> <span class="rules">{
+  <span class="rule"><span class="attribute">stroke</span>:<span class="value"> <span class="number">#444</span></span>;</span>
+  <span class="rule"><span class="attribute">stroke-width</span>:<span class="value"> <span class="number">2</span>px</span>;</span>
+  <span class="rule"><span class="attribute">fill</span>:<span class="value"> <span class="number">#709CB1</span></span>;</span>
+  <span class="rule"><span class="attribute">fill-opacity</span>:<span class="value"> <span class="number">0.6</span></span>;</span>
+<span class="rule">}</span></span>
+
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://d3js.org/d3.v3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"d3-starPlot.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+
+<span class="keyword">var</span> margin = {
+  top: <span class="number">36</span>,
+  right: <span class="number">50</span>,
+  bottom: <span class="number">20</span>,
+  left: <span class="number">50</span>
+};
+<span class="keyword">var</span> width = <span class="number">240</span> - margin.left - margin.right;
+<span class="keyword">var</span> height = <span class="number">240</span> - margin.top - margin.bottom;
+<span class="keyword">var</span> labelMargin = <span class="number">8</span>;
+
+<span class="keyword">var</span> scale = d3.scale.linear()
+  .domain([<span class="number">0</span>, <span class="number">4</span>])
+  .range([<span class="number">0</span>, <span class="number">100</span>])
+
+d3.csv(<span class="string">'whiskies.csv'</span>)
+  .row(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span>
+      d.Body = +d.Body;
+      d.Sweetness = +d.Sweetness;
+      d.Smoky = +d.Smoky;
+      d.Medicinal = +d.Medicinal;
+      d.Tobacco = +d.Tobacco;
+      d.Honey = +d.Honey;
+      d.Spicy = +d.Spicy;
+      d.Winey = +d.Winey;
+      d.Nutty = +d.Nutty;
+      d.Malty = +d.Malty;
+      d.Fruity = +d.Fruity;
+      d.Floral = +d.Floral;
+      <span class="keyword">return</span> d;
+  })
+  .get(<span class="function"><span class="keyword">function</span><span class="params">(error, rows)</span> {</span>
+    <span class="keyword">var</span> star = d3.starPlot()
+      .width(width)
+      .accessors([
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Body); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Sweetness); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Smoky); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Honey); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Spicy); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Nutty); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Malty); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Fruity); },
+        <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> scale(d.Floral); },
+      ])
+      .labels([
+        <span class="string">'Body'</span>,
+        <span class="string">'Sweetness'</span>,
+        <span class="string">'Smoky'</span>,
+        <span class="string">'Honey'</span>,
+        <span class="string">'Spicy'</span>,
+        <span class="string">'Nutty'</span>,
+        <span class="string">'Malty'</span>,
+        <span class="string">'Fruity'</span>,
+        <span class="string">'Floral'</span>,
+      ])
+      .title(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.Distillery; })
+      .margin(margin)
+      .labelMargin(labelMargin)
+
+    rows.forEach(<span class="function"><span class="keyword">function</span><span class="params">(d, i)</span> {</span>
+      star.includeLabels(i % <span class="number">4</span> === <span class="number">0</span> ? <span class="literal">true</span> : <span class="literal">false</span>);
+
+      d3.select(<span class="string">'#target'</span>).append(<span class="string">'svg'</span>)
+        .attr(<span class="string">'class'</span>, <span class="string">'chart'</span>)
+        .attr(<span class="string">'width'</span>, width + margin.left + margin.right)
+        .attr(<span class="string">'height'</span>, width + margin.top + margin.bottom)
+        .append(<span class="string">'g'</span>)
+          .datum(d)
+          .call(star)
+    });
+  });
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">'target'</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+
+</code></pre></div><div class="gist-source"><h2>d3-starPlot.js<a name="d3-starPlot.js" href="http://bl.ocks.org/kevinschaul/8213691#d3-starPlot.js">#</a></h2><pre><code class="javascript">d3.starPlot = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">var</span> width = <span class="number">200</span>,
+      margin = {
+        top: <span class="number">0</span>,
+        right: <span class="number">0</span>,
+        bottom: <span class="number">0</span>,
+        left: <span class="number">0</span>
+      },
+      labelMargin = <span class="number">20</span>,
+      includeGuidelines = <span class="literal">true</span>,
+      includeLabels = <span class="literal">true</span>,
+      accessors = [],
+      labels = [],
+      title = nop,
+
+      g,
+      datum,
+      radius = width / <span class="number">2</span>,
+      origin = [radius, radius],
+      radii = accessors.length,
+      radians = <span class="number">2</span> * Math.PI / radii,
+      scale = d3.scale.linear()
+        .domain([<span class="number">0</span>, <span class="number">100</span>])
+        .range([<span class="number">0</span>, radius])
+
+  <span class="function"><span class="keyword">function</span> <span class="title">chart</span><span class="params">(selection)</span> {</span>
+    datum = selection.datum();
+    g = selection
+      .attr(<span class="string">'transform'</span>, <span class="string">'translate('</span> + margin.left + <span class="string">','</span> + margin.top + <span class="string">')'</span>)
+
+    <span class="keyword">if</span> (includeGuidelines) {
+      drawGuidelines();
+    }
+    <span class="keyword">if</span> (includeLabels) {
+      drawLabels();
+    }
+
+    drawChart();
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">drawGuidelines</span><span class="params">()</span> {</span>
+    <span class="keyword">var</span> r = <span class="number">0</span>;
+    accessors.forEach(<span class="function"><span class="keyword">function</span><span class="params">(d, i)</span> {</span>
+      <span class="keyword">var</span> l, x, y;
+
+      l = radius;
+      x = l * Math.cos(r);
+      y = l * Math.sin(r);
+      g.append(<span class="string">'line'</span>)
+        .attr(<span class="string">'class'</span>, <span class="string">'star-axis'</span>)
+        .attr(<span class="string">'x1'</span>, origin[<span class="number">0</span>])
+        .attr(<span class="string">'y1'</span>, origin[<span class="number">1</span>])
+        .attr(<span class="string">'x2'</span>, origin[<span class="number">0</span>] + x)
+        .attr(<span class="string">'y2'</span>, origin[<span class="number">1</span>] + y)
+
+      r += radians;
+    })
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">drawLabels</span><span class="params">()</span> {</span>
+    <span class="keyword">var</span> r = <span class="number">0</span>;
+    accessors.forEach(<span class="function"><span class="keyword">function</span><span class="params">(d, i)</span> {</span>
+      <span class="keyword">var</span> l, x, y;
+
+      l = radius;
+      x = (l + labelMargin) * Math.cos(r);
+      y = (l + labelMargin) * Math.sin(r);
+      g.append(<span class="string">'text'</span>)
+        .attr(<span class="string">'class'</span>, <span class="string">'star-label'</span>)
+        .attr(<span class="string">'x'</span>, origin[<span class="number">0</span>] + x)
+        .attr(<span class="string">'y'</span>, origin[<span class="number">1</span>] + y)
+        .text(labels[i])
+        .style(<span class="string">'text-anchor'</span>, <span class="string">'middle'</span>)
+        .style(<span class="string">'dominant-baseline'</span>, <span class="string">'central'</span>)
+
+      r += radians;
+    })
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">drawChart</span><span class="params">()</span> {</span>
+    g.append(<span class="string">'circle'</span>)
+      .attr(<span class="string">'class'</span>, <span class="string">'star-origin'</span>)
+      .attr(<span class="string">'cx'</span>, origin[<span class="number">0</span>])
+      .attr(<span class="string">'cy'</span>, origin[<span class="number">1</span>])
+      .attr(<span class="string">'r'</span>, <span class="number">2</span>)
+
+    <span class="keyword">var</span> path = d3.svg.line.radial()
+
+    <span class="keyword">var</span> pathData = [];
+    <span class="keyword">var</span> r = Math.PI / <span class="number">2</span>;
+    accessors.forEach(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span>
+      pathData.push([
+        scale(d(datum)),
+        r
+      ])
+      r += radians;
+    });
+
+    g.append(<span class="string">'path'</span>)
+      .attr(<span class="string">'class'</span>, <span class="string">'star-path'</span>)
+      .attr(<span class="string">'transform'</span>, <span class="string">'translate('</span> + origin[<span class="number">0</span>] + <span class="string">','</span> + origin[<span class="number">1</span>] + <span class="string">')'</span>)
+      .attr(<span class="string">'d'</span>, path(pathData) + <span class="string">'Z'</span>);
+
+    g.append(<span class="string">'text'</span>)
+      .attr(<span class="string">'class'</span>, <span class="string">'star-title'</span>)
+      .attr(<span class="string">'x'</span>, origin[<span class="number">0</span>])
+      .attr(<span class="string">'y'</span>, -(margin.top / <span class="number">2</span>))
+      .text(title(datum))
+      .style(<span class="string">'text-anchor'</span>, <span class="string">'middle'</span>)
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">nop</span><span class="params">()</span> {</span>
+    <span class="keyword">return</span>;
+  }
+
+  chart.accessors = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> accessors;
+    accessors = _;
+    radii = accessors.length;
+    radians = <span class="number">2</span> * Math.PI / radii;
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.width = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> width;
+    width = _;
+    radius = width / <span class="number">2</span>;
+    origin = [radius, radius];
+    scale.range([<span class="number">0</span>, radius])
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.margin = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> margin;
+    margin = _;
+    origin = [radius, radius];
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.labelMargin = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> labelMargin;
+    labelMargin = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.title = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> title;
+    title = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.labels = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> labels;
+    labels = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.includeGuidelines = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> includeGuidelines;
+    includeGuidelines = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.includeLabels = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> includeLabels;
+    includeLabels = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  <span class="keyword">return</span> chart;
+}
+
+</code></pre></div><div class="gist-source"><h2>whiskies.csv<a name="whiskies.csv" href="http://bl.ocks.org/kevinschaul/8213691#whiskies.csv">#</a></h2><pre><code class="undefined">RowID,Distillery,Body,Sweetness,Smoky,Medicinal,Tobacco,Honey,Spicy,Winey,Nutty,Malty,Fruity,Floral,Postcode, Latitude, Longitude
+01,Aberfeldy,2,2,2,0,0,2,1,2,2,2,2,2, 	PH15 2EB, 286580,749680
+02,Aberlour,3,3,1,0,0,4,3,2,2,3,3,2, 	AB38 9PJ, 326340,842570
+03,AnCnoc,1,3,2,0,0,2,0,0,2,2,3,2, 	AB5 5LI, 352960,839320
+04,Ardbeg,4,1,4,4,0,0,2,0,1,2,1,0, 	PA42 7EB, 141560,646220
+05,Ardmore,2,2,2,0,0,1,1,1,2,3,1,1, 	AB54 4NH, 355350,829140
+06,ArranIsleOf,2,3,1,1,0,1,1,1,0,1,1,2, KA27 8HJ, 194050,649950
+07,Auchentoshan,0,2,0,0,0,1,1,0,2,2,3,3, G81 4SJ, 247670,672610
+08,Auchroisk,2,3,1,0,0,2,1,2,2,2,2,1, 	AB55 3XS, 340754,848623 
+09,Aultmore,2,2,1,0,0,1,0,0,2,2,2,2, 	AB55 3QY, 340754,848623
+10,Balblair,2,3,2,1,0,0,2,0,2,1,2,1, 	IV19 1LB, 270820,885770
+11,Balmenach,4,3,2,0,0,2,1,3,3,0,1,2, 	PH26 3PF, 307750,827170
+12,Belvenie,3,2,1,0,0,3,2,1,0,2,2,2, 	AB55 4DH, 332680,840840
+13,BenNevis,4,2,2,0,0,2,2,0,2,2,2,2, 	PH33 6TJ, 212600,775710
+14,Benriach,2,2,1,0,0,2,2,0,0,2,3,2, 	IV30 8SJ, 323450,858380
+15,Benrinnes,3,2,2,0,0,3,1,1,2,3,2,2, 	AB38 9NN, 325800,839920
+16,Benromach,2,2,2,0,0,2,2,1,2,2,2,2, 	IV36 3EB, 303330,859350
+17,Bladnoch,1,2,1,0,0,0,1,1,0,2,2,3, 	DG8 9AB, 242260,554260
+18,BlairAthol,2,2,2,0,0,1,2,2,2,2,2,2, 	PH16 5LY, 294860,757580
+19,Bowmore,2,2,3,1,0,2,2,1,1,1,1,2, 	PA43 7GS, 131330,659720
+20,Bruichladdich,1,1,2,2,0,2,2,1,2,2,2,2, PA49 7UN, 126680,661400
+21,Bunnahabhain,1,2,1,1,0,1,1,1,1,2,2,3, PA46 7RR, 142210,673170
+22,Caol Ila,3,1,4,2,1,0,2,0,2,1,1,1, 	PA46 7RL, 142920,670040
+23,Cardhu,1,3,1,0,0,1,1,0,2,2,2,2, 	AB38 7RY, 318790,843090
+24,Clynelish,3,2,3,3,1,0,2,0,1,1,2,0, 	KW9 6LB, 290250,904230
+25,Craigallechie,2,2,2,0,1,2,2,1,2,2,1,4, AB38 9ST, 328920,844920
+26,Craigganmore,2,3,2,1,0,0,1,0,2,2,2,2, AB37 9AB, 316600,836370
+27,Dailuaine,4,2,2,0,0,1,2,2,2,2,2,1, 	AB38 7RE, 323520,841010
+28,Dalmore,3,2,2,1,0,1,2,2,1,2,3,1, 	IV17 0UT, 266610,868730
+29,Dalwhinnie,2,2,2,0,0,2,1,0,1,2,2,2, 	PH19 1AB, 263670,785270
+30,Deanston,2,2,1,0,0,2,1,1,1,3,2,1, FK16 6AG, 271570,701570
+31,Dufftown,2,3,1,1,0,0,0,0,1,2,2,2, AB55 4BR, 332360,839200
+32,Edradour,2,3,1,0,0,2,1,1,4,2,2,2, PH16 5JP, 295960,757940
+33,GlenDeveronMacduff,2,3,1,1,1,1,1,2,0,2,0,1, AB4 3JT, 372120,860400
+34,GlenElgin,2,3,1,0,0,2,1,1,1,1,2,3, IV30 3SL, 322640,861040
+35,GlenGarioch,2,1,3,0,0,0,3,1,0,2,2,2, AB51 0ES, 381020,827590
+36,GlenGrant,1,2,0,0,0,1,0,1,2,1,2,1, AB38 7BS, 327610,849570
+37,GlenKeith,2,3,1,0,0,1,2,1,2,1,2,1, AB55 3BU, 340754,848623
+38,GlenMoray,1,2,1,0,0,1,2,1,2,2,2,4, IV30 1YE, 319820,862320 
+39,GlenOrd,3,2,1,0,0,1,2,1,1,2,2,2, IV6 7UJ, 251810,850860
+40,GlenScotia,2,2,2,2,0,1,0,1,2,2,1,1, PA28 6DS, 172090,621010
+41,GlenSpey,1,3,1,0,0,0,1,1,1,2,0,2, AB38 7AU, 327760,849140
+42,Glenallachie,1,3,1,0,0,1,1,0,1,2,2,2, AB38 9LR, 326490,841240
+43,Glendronach,4,2,2,0,0,2,1,4,2,2,2,0, AB54 6DA, 361200,844930
+44,Glendullan,3,2,1,0,0,2,1,2,1,2,3,2, AB55 4DJ, 333000,840300
+45,Glenfarclas,2,4,1,0,0,1,2,3,2,3,2,2, AB37 9BD, 320950,838160
+46,Glenfiddich,1,3,1,0,0,0,0,0,0,2,2,2, AB55 4DH, 332680,840840
+47,Glengoyne,1,2,0,0,0,1,1,1,2,2,3,2, G63 9LB, 252810,682750
+48,Glenkinchie,1,2,1,0,0,1,2,0,0,2,2,2, EH34 5ET, 344380,666690
+49,Glenlivet,2,3,1,0,0,2,2,2,1,2,2,3, AB37 9DB, 319560,828780
+50,Glenlossie,1,2,1,0,0,1,2,0,1,2,2,2, IV30 3SS, 322640,861040
+51,Glenmorangie,2,2,1,1,0,1,2,0,2,1,2,2, IV19 1PZ, 276750,883450
+52,Glenrothes,2,3,1,0,0,1,1,2,1,2,2,0, AB38 7AA, 327650,849170
+53,Glenturret,2,3,1,0,0,2,2,2,2,2,1,2, PH7 4HA, 285630,723580
+54,Highland Park,2,2,3,1,0,2,1,1,1,2,1,1, KW15 1SU, 345340,1009260
+55,Inchgower,1,3,1,1,0,2,2,0,1,2,1,2, AB56 5AB, 342610,863970
+56,Isle of Jura,2,1,2,2,0,1,1,0,2,1,1,1, PA60 7XT, 152660,667040
+57,Knochando,2,3,1,0,0,2,2,1,2,1,2,2, AB38 7RT, 319470,841570
+58,Lagavulin,4,1,4,4,1,0,1,2,1,1,1,0, PA42 7DZ, 140430,645730
+59,Laphroig,4,2,4,4,1,0,0,1,1,1,0,0, PA42 7DU, 138680,645160
+60,Linkwood,2,3,1,0,0,1,1,2,0,1,3,2, IV30 3RD, 322640,861040
+61,Loch Lomond,1,1,1,1,0,1,1,0,1,2,1,2, G83 0TL, 239370,680920
+62,Longmorn,3,2,1,0,0,1,1,1,3,3,2,3, IV30 3SJ, 322640,861040
+63,Macallan,4,3,1,0,0,2,1,4,2,2,3,1, AB38 9RX, 327710,844480
+64,Mannochmore,2,1,1,0,0,1,1,1,2,1,2,2, IV30 3SS, 322640,861040
+65,Miltonduff,2,4,1,0,0,1,0,0,2,1,1,2, IV30 3TQ, 322640,861040
+66,Mortlach,3,2,2,0,0,2,3,3,2,1,2,2, AB55 4AQ, 332950,839850
+67,Oban,2,2,2,2,0,0,2,0,2,2,2,0, PA34 5NH, 185940,730190
+68,OldFettercairn,1,2,2,0,1,2,2,1,2,3,1,1, AB30 1YE, 370860,772900
+69,OldPulteney,2,1,2,2,1,0,1,1,2,2,2,2, KW1 5BA, 336730,950130
+70,RoyalBrackla,2,3,2,1,1,1,2,1,0,2,3,2, IV12 5QY, 286040,851320
+71,RoyalLochnagar,3,2,2,0,0,2,2,2,2,2,3,1, AB35 5TB, 326140,794370
+72,Scapa,2,2,1,1,0,2,1,1,2,2,2,2, KW15 1SE, 342850,1008930
+73,Speyburn,2,4,1,0,0,2,1,0,0,2,1,2, AB38 7AG, 326930,851430
+74,Speyside,2,2,1,0,0,1,0,1,2,2,2,2, PH21 1NS, 278740,800600
+75,Springbank,2,2,2,2,0,2,2,1,2,1,0,1, PA28 6EJ, 172280,620910
+76,Strathisla,2,2,1,0,0,2,2,2,3,3,3,2, AB55 3BS, 340754,848623
+77,Strathmill,2,3,1,0,0,0,2,0,2,1,3,2, AB55 5DQ,342650,850500 
+78,Talisker,4,2,3,3,0,1,3,0,1,2,2,0, IV47 8SR, 137950,831770
+79,Tamdhu,1,2,1,0,0,2,0,1,1,2,2,2, AB38 7RP, 319210,841760
+80,Tamnavulin,1,3,2,0,0,0,2,0,2,1,2,3, AB37 9JA, 321180,826110
+81,Teaninich,2,2,2,1,0,0,2,0,0,0,2,2, IV17 0XB, 265360,869120
+82,Tobermory,1,1,1,0,0,1,0,0,1,2,2,2, PA75 6NR, 150450,755070
+83,Tomatin,2,3,2,0,0,2,2,1,1,2,0,1, IV13 7YT, 279120,829630
+84,Tomintoul,0,3,1,0,0,2,2,1,1,2,1,2, AB37 9AQ, 315100,825560
+85,Tormore,2,2,1,0,0,1,0,1,2,1,0,0, PH26 3LR, 315180,834960
+86,Tullibardine,2,3,0,0,1,0,2,1,1,2,2,1, PH4 1QG, 289690,708850</code></pre></div></div>
+
+<script src="./Star plots in d3_files/d3.v3.min.js"></script>
+<script src="./Star plots in d3_files/highlight.min.js"></script>
+<script>
+
+var gist = {"history":[{"version":"84d436f9f5f17d1e81d4bab9fce22fbd3499ef64"}],"files":{"README.md":{"language":"Markdown","type":"text/plain","filename":"README.md","size":227,"sha":"27c3465458e189c00d7da019cc87e2cff0a2a990"},"d3-starPlot.js":{"language":"JavaScript","type":"application/javascript","filename":"d3-starPlot.js","size":3641,"sha":"f054a12f015712ea92b196ba9d238cbff1c56053"},"index.html":{"language":"HTML","type":"text/html","filename":"index.html","size":2443,"sha":"0ab8deaf52f30c0f54f9096f9ee7020f7ee58381"},"whiskies.csv":{"language":null,"type":"text/csv","filename":"whiskies.csv","size":5509,"sha":"3f4b192b410376c764940ebe42b262cfc84658af"}},"created_at":"2014-01-02T01:28:34.000Z","updated_at":"2014-01-06T22:58:29.000Z","description":"Star plots in d3","owner":{"login":"kevinschaul"},"id":"8213691"};
+
+var files = d3.values(gist.files)
+    .sort(function(a, b) { return (b.filename === "index.html") - (a.filename === "index.html") || a.filename.localeCompare(b.filename); });
+
+var readme = d3.selectAll(".gist-readme")
+    .data(files.filter(function(d) { return /^readme\b/i.test(d.filename) && d.language === "Markdown"; }))
+    .each(function(d) {
+      var readme = d3.select(this);
+      d3.text("/kevinschaul/raw/8213691/84d436f9f5f17d1e81d4bab9fce22fbd3499ef64/" + d.filename, function(error, content) {
+        readme.html(new Showdown.converter().makeHtml(content));
+        readme.selectAll("code").each(function() { hljs.highlightBlock(this); });
+      });
+    });
+
+var source = d3.select(".gist-sources").selectAll(".gist-source")
+    .data(files.filter(function(d) { return !/^readme\b/i.test(d.filename) && d.size < 50000 && text(d.type); }))
+  .enter().append("div")
+    .attr("class", "gist-source");
+
+source.append("h2")
+    .text(function(d) { return d.filename; })
+  .append("a")
+    .attr("name", function(d) { return d.filename; })
+    .attr("href", function(d) { return "#" + d.filename; })
+    .text("#");
+
+source.append("pre").append("code")
+    .attr("class", function(d) { return d.language && (d.language === "JSON" ? "javascript" : d.language.toLowerCase()); })
+    .each(function(d) {
+      var code = d3.select(this);
+      d3.text("/kevinschaul/raw/8213691/84d436f9f5f17d1e81d4bab9fce22fbd3499ef64/" + (d.filename === "index.html" ? "" : d.filename), function(error, content) {
+        code.text(content);
+        hljs.highlightBlock(code.node());
+      });
+    });
+
+function text(type) {
+  return /(^text\/)|(^application\/(javascript|json)$)|(^image\/svg$)|(\+xml$)/.test(type);
+}
+
+</script>
+
+<footer>
+  <a href="http://bl.ocks.org/kevinschaul">kevinschaul</a>’s block
+  <a class="gist" title="View gist #8213691 on GitHub" href="https://gist.github.com/kevinschaul/8213691">#8213691</a>
+  <span class="date">January 2, 2014</span>
+</footer>
+
+<script>
+
+GoogleAnalyticsObject = "ga", ga = function() { ga.q.push(arguments); }, ga.q = [], ga.l = +new Date;
+ga("create", "UA-48272912-1", "ocks.org");
+ga("send", "pageview");
+
+</script>
+<script async="" src="./Star plots in d3_files/analytics.js"></script>
+</body><object id="489a9a88-e89b-b59d-48cb-88b29ba5b082" width="0" height="0" type="application/gas-events-bb"></object></html>

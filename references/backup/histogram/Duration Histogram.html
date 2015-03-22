@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://bl.ocks.org/mbostock/3048166 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>Duration Histogram</title>
+<link rel="icon" href="http://bl.ocks.org/favicon.png">
+<style>
+
+@import url("/style.css?20120730");
+
+header,
+footer {
+  color: #555;
+}
+
+a.gist {
+  color: #000;
+}
+
+</style>
+
+<style type="text/css"></style></head><body><header>
+  <a href="http://bl.ocks.org/mbostock">mbostock</a>’s block
+  <a class="gist" title="View gist #3048166 on GitHub" href="https://gist.github.com/mbostock/3048166">#3048166</a>
+  <span class="date">July 4, 2012</span>
+</header>
+
+<h1>Duration Histogram</h1>
+
+
+<iframe src="./Duration Histogram_files/saved_resource.html" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<p></p><aside><a style="position:relative;top:6px;" href="http://bl.ocks.org/mbostock/raw/3048166/" target="_blank">Open in a new window.</a></aside>
+
+
+<div class="gist-readme"><p>This chart shows a histogram of a <a href="http://en.wikipedia.org/wiki/Log-normal_distribution">log-normal distribution</a> of time durations. The data is randomly generated: each value is a number representing a duration measured in minutes. The values are then binned at regular intervals using D3’s <a href="https://github.com/mbostock/d3/wiki/Histogram-Layout#wiki-histogram">histogram layout</a>. A custom tick format for the <em>x</em>-axis converts these numbers to dates before passing them through a <a href="https://github.com/mbostock/d3/wiki/Time-Formatting">d3.time.format</a>. The <em>x</em>-axis uses a linear scale, such that the tick values appear in-between bars; this provides better indication that each bar represents the count of values between its surrounding tick values.</p>
+
+<p>See also this <a href="http://bl.ocks.org/3048450">histogram of an Irwin–Hall distribution</a>.</p></div>
+
+<div class="gist-sources"><div class="gist-source"><h2>index.html<a name="index.html" href="http://bl.ocks.org/mbostock/3048166#index.html">#</a></h2><pre><code class="html xml"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+
+<span class="tag">body</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font</span>:<span class="value"> <span class="number">10</span>px sans-serif</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="class">.bar</span> <span class="tag">rect</span> <span class="rules">{
+  <span class="rule"><span class="attribute">fill</span>:<span class="value"> steelblue</span>;</span>
+  <span class="rule"><span class="attribute">shape-rendering</span>:<span class="value"> crispEdges</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="class">.bar</span> <span class="tag">text</span> <span class="rules">{
+  <span class="rule"><span class="attribute">fill</span>:<span class="value"> <span class="hexcolor">#fff</span></span>;</span>
+<span class="rule">}</span></span>
+
+<span class="class">.axis</span> <span class="tag">path</span>, <span class="class">.axis</span> <span class="tag">line</span> <span class="rules">{
+  <span class="rule"><span class="attribute">fill</span>:<span class="value"> none</span>;</span>
+  <span class="rule"><span class="attribute">stroke</span>:<span class="value"> <span class="number">#000</span></span>;</span>
+  <span class="rule"><span class="attribute">shape-rendering</span>:<span class="value"> crispEdges</span>;</span>
+<span class="rule">}</span></span>
+
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://d3js.org/d3.v2.min.js?2.10.0"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+
+<span class="comment">// Generate a log-normal distribution with a median of 30 minutes.</span>
+<span class="keyword">var</span> values = d3.range(<span class="number">1000</span>).map(d3.random.logNormal(Math.log(<span class="number">30</span>), .<span class="number">4</span>));
+
+<span class="comment">// Formatters for counts and times (converting numbers to Dates).</span>
+<span class="keyword">var</span> formatCount = d3.format(<span class="string">",.0f"</span>),
+    formatTime = d3.time.format(<span class="string">"%H:%M"</span>),
+    formatMinutes = <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> formatTime(<span class="keyword">new</span> Date(<span class="number">2012</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, d)); };
+
+<span class="keyword">var</span> margin = {top: <span class="number">10</span>, right: <span class="number">30</span>, bottom: <span class="number">30</span>, left: <span class="number">30</span>},
+    width = <span class="number">960</span> - margin.left - margin.right,
+    height = <span class="number">500</span> - margin.top - margin.bottom;
+
+<span class="keyword">var</span> x = d3.scale.linear()
+    .domain([<span class="number">0</span>, <span class="number">120</span>])
+    .range([<span class="number">0</span>, width]);
+
+<span class="comment">// Generate a histogram using twenty uniformly-spaced bins.</span>
+<span class="keyword">var</span> data = d3.layout.histogram()
+    .bins(x.ticks(<span class="number">20</span>))
+    (values);
+
+<span class="keyword">var</span> y = d3.scale.linear()
+    .domain([<span class="number">0</span>, d3.max(data, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.y; })])
+    .range([height, <span class="number">0</span>]);
+
+<span class="keyword">var</span> xAxis = d3.svg.axis()
+    .scale(x)
+    .orient(<span class="string">"bottom"</span>)
+    .tickFormat(formatMinutes);
+
+<span class="keyword">var</span> svg = d3.select(<span class="string">"body"</span>).append(<span class="string">"svg"</span>)
+    .attr(<span class="string">"width"</span>, width + margin.left + margin.right)
+    .attr(<span class="string">"height"</span>, height + margin.top + margin.bottom)
+  .append(<span class="string">"g"</span>)
+    .attr(<span class="string">"transform"</span>, <span class="string">"translate("</span> + margin.left + <span class="string">","</span> + margin.top + <span class="string">")"</span>);
+
+<span class="keyword">var</span> bar = svg.selectAll(<span class="string">".bar"</span>)
+    .data(data)
+  .enter().append(<span class="string">"g"</span>)
+    .attr(<span class="string">"class"</span>, <span class="string">"bar"</span>)
+    .attr(<span class="string">"transform"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> <span class="string">"translate("</span> + x(d.x) + <span class="string">","</span> + y(d.y) + <span class="string">")"</span>; });
+
+bar.append(<span class="string">"rect"</span>)
+    .attr(<span class="string">"x"</span>, <span class="number">1</span>)
+    .attr(<span class="string">"width"</span>, x(data[<span class="number">0</span>].dx) - <span class="number">1</span>)
+    .attr(<span class="string">"height"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> height - y(d.y); });
+
+bar.append(<span class="string">"text"</span>)
+    .attr(<span class="string">"dy"</span>, <span class="string">".75em"</span>)
+    .attr(<span class="string">"y"</span>, <span class="number">6</span>)
+    .attr(<span class="string">"x"</span>, x(data[<span class="number">0</span>].dx) / <span class="number">2</span>)
+    .attr(<span class="string">"text-anchor"</span>, <span class="string">"middle"</span>)
+    .text(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> formatCount(d.y); });
+
+svg.append(<span class="string">"g"</span>)
+    .attr(<span class="string">"class"</span>, <span class="string">"x axis"</span>)
+    .attr(<span class="string">"transform"</span>, <span class="string">"translate(0,"</span> + height + <span class="string">")"</span>)
+    .call(xAxis);
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div></div>
+
+<script src="./Duration Histogram_files/d3.v3.min.js"></script>
+<script src="./Duration Histogram_files/highlight.min.js"></script>
+<script>
+
+var gist = {"history":[{"version":"46bb2a235a4c2f8930c11974771e6409847fcbd2"}],"files":{"README.md":{"language":"Markdown","type":"text/plain","filename":"README.md","size":839,"sha":"7d559af72a097b4ef9ad7cf3f04d8a0b573eb7a4"},"index.html":{"language":"HTML","type":"text/html","filename":"index.html","size":2171,"sha":"9a41bae87a16b3c92d6457290e0872048777ac66"},"thumbnail.png":{"language":null,"type":"image/png","filename":"thumbnail.png","size":3936,"sha":"a5e70801e15e1c47012cfdcd251015aa01092f8b"}},"created_at":"2012-07-04T16:29:34.000Z","updated_at":"2014-09-08T21:38:25.000Z","description":"Duration Histogram","owner":{"login":"mbostock"},"id":"3048166"};
+
+var files = d3.values(gist.files)
+    .sort(function(a, b) { return (b.filename === "index.html") - (a.filename === "index.html") || a.filename.localeCompare(b.filename); });
+
+var readme = d3.selectAll(".gist-readme")
+    .data(files.filter(function(d) { return /^readme\b/i.test(d.filename) && d.language === "Markdown"; }))
+    .each(function(d) {
+      var readme = d3.select(this);
+      d3.text("/mbostock/raw/3048166/46bb2a235a4c2f8930c11974771e6409847fcbd2/" + d.filename, function(error, content) {
+        readme.html(new Showdown.converter().makeHtml(content));
+        readme.selectAll("code").each(function() { hljs.highlightBlock(this); });
+      });
+    });
+
+var source = d3.select(".gist-sources").selectAll(".gist-source")
+    .data(files.filter(function(d) { return !/^readme\b/i.test(d.filename) && d.size < 50000 && text(d.type); }))
+  .enter().append("div")
+    .attr("class", "gist-source");
+
+source.append("h2")
+    .text(function(d) { return d.filename; })
+  .append("a")
+    .attr("name", function(d) { return d.filename; })
+    .attr("href", function(d) { return "#" + d.filename; })
+    .text("#");
+
+source.append("pre").append("code")
+    .attr("class", function(d) { return d.language && (d.language === "JSON" ? "javascript" : d.language.toLowerCase()); })
+    .each(function(d) {
+      var code = d3.select(this);
+      d3.text("/mbostock/raw/3048166/46bb2a235a4c2f8930c11974771e6409847fcbd2/" + (d.filename === "index.html" ? "" : d.filename), function(error, content) {
+        code.text(content);
+        hljs.highlightBlock(code.node());
+      });
+    });
+
+function text(type) {
+  return /(^text\/)|(^application\/(javascript|json)$)|(^image\/svg$)|(\+xml$)/.test(type);
+}
+
+</script>
+
+<footer>
+  <a href="http://bl.ocks.org/mbostock">mbostock</a>’s block
+  <a class="gist" title="View gist #3048166 on GitHub" href="https://gist.github.com/mbostock/3048166">#3048166</a>
+  <span class="date">July 4, 2012</span>
+</footer>
+
+<script>
+
+GoogleAnalyticsObject = "ga", ga = function() { ga.q.push(arguments); }, ga.q = [], ga.l = +new Date;
+ga("create", "UA-48272912-1", "ocks.org");
+ga("send", "pageview");
+
+</script>
+<script async="" src="./Duration Histogram_files/analytics.js"></script>
+</body><object id="c9e9b91b-1a69-af9e-aa79-18a5fbabbcb5" width="0" height="0" type="application/gas-events-bb"></object></html>

@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://gist.github.com/mbostock/4063663 -->
+<html class="  "><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Scatterplot Matrix Brushing</title>
+
+  <meta content="authenticity_token" name="csrf-param">
+<meta content="RxBTYo6p04bs4jEFKIqkEgAzryz8/fqjC2R5V9FN1QaPZHR5ux4GJd/Jq7yNqIr5K6yLMlfeIEgcfhEHkmTCpw==" name="csrf-token">
+  <meta name="viewport" content="width=960">
+
+
+    <link type="text/plain" rel="author" href="https://github.com/humans.txt">
+    <meta content="gist" name="octolytics-app-id"><meta content="collector.githubapp.com" name="octolytics-host"><meta content="collector-cdn.github.com" name="octolytics-script-host"><meta content="86BEAFD0:72C4:10346309:54E7A685" name="octolytics-dimension-request_id">
+  <link rel="assets" href="https://gist-assets.github.com/">
+  <link rel="zeroclipboard-assets" href="https://gist-assets.github.com/assets/zeroclipboard/dist/ZeroClipboard-aeb54c213f0d09883fed5a0947132da9.swf">
+  <link rel="editor-assets" href="https://gist-assets.github.com/assets/editor-cac2d04c8f22b5ffe38f6bc97dc54f54.js">
+  <link rel="mount-point" href="https://gist.github.com/">
+
+
+  <link href="https://gist-assets.github.com/assets/application-0622f4c051642df21ab90d3eb66a52b8.css" media="screen, print" rel="stylesheet">
+  <script async="" src="./Scatterplot Matrix Brushing2_files/analytics.js"></script><script src="./Scatterplot Matrix Brushing2_files/application-9441728a90e54c65c8d4079bfabcbff5.js"></script><style type="text/css"></style>
+
+      <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@github">
+  <meta property="og:title" content="mbostock/README.md">
+  <meta property="og:type" content="githubog:gist">
+  <meta property="og:url" content="https://gist.github.com/mbostock/4063663">
+  <meta property="og:image" content="https://avatars1.githubusercontent.com/u/230541?s=140">
+  <meta property="og:site_name" content="GitHub Gists">
+  <meta property="og:description" content="Scatterplot Matrix Brushing - Gist is a simple way to share snippets of text and code with others.">
+  <meta name="description" content="Scatterplot Matrix Brushing - Gist is a simple way to share snippets of text and code with others.">
+
+
+<script src="./Scatterplot Matrix Brushing2_files/api.js"></script></head>
+
+<body class=" " data-plan="">
+
+  <div id="wrapper">
+    
+
+    <div id="header" class="header header-logged-out">
+      <div class="container">
+        <a class="header-logo-wordmark" href="https://gist.github.com/">
+          <span class="octicon octicon-logo-github"></span>
+          <span class="octicon-logo octicon-logo-gist"></span>
+        </a>
+
+        <div class="header-actions">
+          <a class="button primary" href="https://github.com/signup?return_to=gist">Sign up for a GitHub account</a>
+          <a class="button" href="https://gist.github.com/login?return_to=%2Fmbostock%2F4063663" data-skip-pjax="">Sign in</a>
+        </div>
+        <div class="divider-vertical"></div>
+        <div class="topsearch">
+  <form id="top_search_form" action="https://gist.github.com/search" data-pjax-remote="push" accept-charset="UTF-8">
+    <div class="search">
+      <input type="text" class="search js-search js-navigation-enable " name="q" placeholder="Search…" data-hotkey="/" autocomplete="off" autocorrect="off" value="">
+
+    </div>
+    <div class="divider-vertical"></div>
+  </form>
+  <ul class="top-nav">
+    <li class="explore"><a href="https://gist.github.com/discover">All Gists</a></li>
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <div class="site-content" id="js-pjax-container" data-pjax-container="">
+      <div id="js-flash-container" class="site-container js-site-container" data-url="/mbostock/4063663">
+  
+  
+
+<meta content="true" name="octolytics-dimension-public"><meta content="4063663" name="octolytics-dimension-gist_id"><meta content="4063663" name="octolytics-dimension-gist_name"><meta content="false" name="octolytics-dimension-anonymous"><meta content="230541" name="octolytics-dimension-owner_id"><meta content="mbostock" name="octolytics-dimension-owner_login"><meta content="true" name="octolytics-dimension-forked"><meta content="3213173" name="octolytics-dimension-parent_gist_id"><meta content="3213173" name="octolytics-dimension-parent_gist_name"><meta content="false" name="octolytics-dimension-parent_anonymous"><meta content="230541" name="octolytics-dimension-parent_owner_id"><meta content="mbostock" name="octolytics-dimension-parent_owner_login">
+
+<div class="pagehead repohead">
+  <div class="container">
+    <div class="title-actions-bar">
+      <ul class="pagehead-actions">
+
+      </ul>
+      <h1 itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title ">
+  <div class="meta">
+    <div class="gist-author">
+      <img src="./Scatterplot Matrix Brushing2_files/230541" width="26" height="26">
+        <span class="author vcard">
+            <span itemprop="title"><a href="https://gist.github.com/mbostock">mbostock</a></span>
+        </span> /
+      <strong><a href="./Scatterplot Matrix Brushing2_files/Scatterplot Matrix Brushing2.html" class="js-current-repository">README.md</a></strong>
+    </div>
+    <div class="gist-timestamp">
+        <span class="datetime">Last active <time datetime="2013-11-22T18:38:33Z" is="relative-time" title="22 Nov 2013 14:38 AST">on 22 Nov 2013</time></span>
+        <span class="text"> — forked from <a href="https://gist.github.com/mbostock/3213173">mbostock/README.md</a></span>
+    </div>
+</div></h1>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="gist js-gist-container gist-with-sidebar with-full-navigation" data-version="94244f5d8aff0ddd19462c258feca668b46296ff" data-created="false" data-updated="false">
+
+      <div class="gist-sidebar clearfix">
+  <div class="sunken-menu vertical-right repo-nav js-repo-nav js-repository-container-pjax js-octicon-loaders">
+    <div class="sunken-menu-contents">
+      <ul class="sunken-menu-group">
+        <li class="tooltipped tooltipped-w" aria-label="Code">
+          <a aria-label="Code" class="sunken-menu-item selected" data-pjax="true" href="./Scatterplot Matrix Brushing2_files/Scatterplot Matrix Brushing2.html">
+            <span class="octicon octicon-code"></span> <span class="full-word">Code</span>
+            <img alt="" class="mini-loader" height="16" src="./Scatterplot Matrix Brushing2_files/octocat-spinner-32-ad13d0fd1814c3fda3b5018da94432ea.gif" width="16">
+</a>        </li>
+
+          <li class="tooltipped tooltipped-w" aria-label="Revisions">
+            <a aria-label="Revisions" class="sunken-menu-item" data-pjax="true" href="https://gist.github.com/mbostock/4063663/revisions">
+              <span class="octicon octicon-git-commit"></span> <span class="full-word">Revisions</span>
+              <img alt="" class="mini-loader" height="16" src="./Scatterplot Matrix Brushing2_files/octocat-spinner-32-ad13d0fd1814c3fda3b5018da94432ea.gif" width="16">
+              <span class="counter">16</span>
+</a>          </li>
+
+          <li class="tooltipped tooltipped-w" aria-label="Stars">
+            <a aria-label="Stars" class="sunken-menu-item" data-pjax="true" href="https://gist.github.com/mbostock/4063663/stars">
+              <span class="octicon octicon-star"></span> <span class="full-word">Stars</span>
+              <img alt="" class="mini-loader" height="16" src="./Scatterplot Matrix Brushing2_files/octocat-spinner-32-ad13d0fd1814c3fda3b5018da94432ea.gif" width="16">
+              <span class="counter">2</span>
+</a>          </li>
+
+          <li class="tooltipped tooltipped-w" aria-label="Forks">
+            <a aria-label="Forks" class="sunken-menu-item" data-pjax="true" href="https://gist.github.com/mbostock/4063663/forks">
+              <span class="octicon octicon-git-branch"></span> <span class="full-word">Forks</span>
+              <img alt="" class="mini-loader" height="16" src="./Scatterplot Matrix Brushing2_files/octocat-spinner-32-ad13d0fd1814c3fda3b5018da94432ea.gif" width="16">
+              <span class="counter">9</span>
+</a>          </li>
+      </ul>
+    </div><!-- /.sunken-menu-group -->
+  </div><!-- /.sunken-menu-contents -->
+
+  <div class="only-with-full-nav">
+
+    <div class="embed-url open" style="display: block;">
+      <h3><strong>Embed</strong> URL</h3>
+      <div class="clone-url-box">
+        <input type="text" class="clone js-url-field" value="&lt;script src=&quot;https://gist.github.com/mbostock/4063663.js&quot;&gt;&lt;/script&gt;" readonly="readonly">
+        <span class="url-box-clippy">
+          <button aria-label="copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-clipboard-text="&lt;script src=&quot;https://gist.github.com/mbostock/4063663.js&quot;&gt;&lt;/script&gt;" data-copied-hint="copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+        </span>
+      </div>
+    </div>
+    <p class="clone-options"></p>
+
+      
+<div class="clone-url open" data-protocol-type="http" data-url="https://gist.github.com/4063663.git">
+  <h3><strong>HTTPS</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone url-field js-url-field" value="https://gist.github.com/4063663.git" readonly="readonly">
+    <span class="url-box-clippy">
+      <button aria-label="copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-clipboard-text="https://gist.github.com/4063663.git" data-copied-hint="copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+  
+<div class="clone-url " data-protocol-type="ssh" data-url="git@gist.github.com:/4063663.git">
+  <h3><strong>SSH</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone url-field js-url-field" value="git@gist.github.com:/4063663.git" readonly="readonly">
+    <span class="url-box-clippy">
+      <button aria-label="copy to clipboard" class="js-zeroclipboard minibutton zeroclipboard-button" data-clipboard-text="git@gist.github.com:/4063663.git" data-copied-hint="copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+
+<p class="clone-options">You can clone with
+      <a href="https://gist.github.com/mbostock/4063663#" class="js-clone-selector" data-skip-pjax="" data-protocol="http">HTTPS</a>
+      or <a href="https://gist.github.com/mbostock/4063663#" class="js-clone-selector" data-skip-pjax="" data-protocol="ssh">SSH</a>.
+</p>
+
+
+    <a aria-label="Download README.md as a zip file" class="minibutton sidebar-button" href="https://gist.github.com/mbostock/4063663/download" rel="nofollow" title="Download README.md as a zip file">
+      <span class="octicon octicon-cloud-download"></span>
+      Download Gist
+</a>  </div><!-- /.only-with-full-nav -->
+
+</div>
+
+
+    <div class="gist-content">
+          <div class="gist-meta">
+            <div class="gist-description">
+              <p></p><div>Scatterplot Matrix Brushing</div><p></p>
+            </div>
+          </div>
+
+      <div class="files">
+            <div id="file-readme-md" class="file ">
+    <a href="./Scatterplot Matrix Brushing2_files/Scatterplot Matrix Brushing2.html" class="link-overlay">
+    <span class="link">View <strong>README.md</strong> <span class="octicon octicon-arrow-right"></span></span>
+  </a>
+  <div class="meta clearfix">
+    <div class="info file-name">
+      <span class="icon">
+        <b class="octicon octicon-gist"></b>
+      </span>
+      <a aria-label="Permalink" href="https://gist.github.com/mbostock/4063663#file-readme-md" class="tooltipped tooltipped-s permalink"><strong class="file-name js-selectable-text">README.md</strong></a>
+    </div>
+    <div class="actions">
+      <div class="button-group">
+        <a aria-label="View Raw" href="https://gist.github.com/mbostock/4063663/raw/37b80032a00600ced9b28b99dd9d56367e1060a9/README.md" data-skip-pjax="" class="minibutton raw-url js-view-raw">Raw</a>
+      </div>
+    </div>
+  </div>
+  <div class="suppressed">
+    <a class="js-show-suppressed-file">File suppressed. Click to show.</a>
+  </div>
+  <div class="blob-wrapper data type-markdown js-blob-data">
+    
+
+    <div class="readme context-loader-container context-loader-overlay">
+      <article class="markdown-body js-file " data-task-list-update-url="https://gist.github.com/mbostock/4063663/file/README.md">
+        <p>The scatterplot matrix visualizations pairwise correlations for multi-dimensional data; each cell in the matrix is a scatterplot. This example uses Anderson's data of iris flowers on the Gaspé Peninsula. Scatterplot matrix design invented by J. A. Hartigan; see also <a href="http://www.r-project.org/" rel="noreferrer">R</a> and <a href="http://www.ggobi.org/" rel="noreferrer">GGobi</a>. Data on <em>Iris</em> flowers collected by Edgar Anderson and published by Ronald Fisher.</p>
+
+<p>See also this simpler static <a href="https://gist.github.com/mbostock/3213173" rel="noreferrer">version without brushing</a>.</p>
+
+      </article>
+    </div>
+
+
+
+  </div>
+</div>
+
+            <div id="file-flowers-csv" class="file ">
+    <a href="./Scatterplot Matrix Brushing2_files/Scatterplot Matrix Brushing2.html" class="link-overlay">
+    <span class="link">View <strong>README.md</strong> <span class="octicon octicon-arrow-right"></span></span>
+  </a>
+  <div class="meta clearfix">
+    <div class="info file-name">
+      <span class="icon">
+        <b class="octicon octicon-gist"></b>
+      </span>
+      <a aria-label="Permalink" href="https://gist.github.com/mbostock/4063663#file-flowers-csv" class="tooltipped tooltipped-s permalink"><strong class="file-name js-selectable-text">flowers.csv</strong></a>
+    </div>
+    <div class="actions">
+      <div class="button-group">
+        <a aria-label="View Raw" href="https://gist.github.com/mbostock/4063663/raw/3fbba4b18a1412f6fed34e780e82ae4108c175f2/flowers.csv" data-skip-pjax="" class="minibutton raw-url js-view-raw">Raw</a>
+      </div>
+    </div>
+  </div>
+  <div class="suppressed">
+    <a class="js-show-suppressed-file">File suppressed. Click to show.</a>
+  </div>
+  <div class="blob-wrapper data type-text js-blob-data">
+    
+
+
+
+    <div class="file-data">
+      <table cellpadding="0" cellspacing="0" class="lines highlight">
+        <tbody><tr>
+          <td class="line-numbers">
+            <span class="line-number" id="file-flowers-csv-L1" rel="file-flowers-csv-L1">1</span>
+            <span class="line-number" id="file-flowers-csv-L2" rel="file-flowers-csv-L2">2</span>
+            <span class="line-number" id="file-flowers-csv-L3" rel="file-flowers-csv-L3">3</span>
+            <span class="line-number" id="file-flowers-csv-L4" rel="file-flowers-csv-L4">4</span>
+            <span class="line-number" id="file-flowers-csv-L5" rel="file-flowers-csv-L5">5</span>
+            <span class="line-number" id="file-flowers-csv-L6" rel="file-flowers-csv-L6">6</span>
+            <span class="line-number" id="file-flowers-csv-L7" rel="file-flowers-csv-L7">7</span>
+            <span class="line-number" id="file-flowers-csv-L8" rel="file-flowers-csv-L8">8</span>
+            <span class="line-number" id="file-flowers-csv-L9" rel="file-flowers-csv-L9">9</span>
+            <span class="line-number" id="file-flowers-csv-L10" rel="file-flowers-csv-L10">10</span>
+            <span class="line-number" id="file-flowers-csv-L11" rel="file-flowers-csv-L11">11</span>
+            <span class="line-number" id="file-flowers-csv-L12" rel="file-flowers-csv-L12">12</span>
+            <span class="line-number" id="file-flowers-csv-L13" rel="file-flowers-csv-L13">13</span>
+            <span class="line-number" id="file-flowers-csv-L14" rel="file-flowers-csv-L14">14</span>
+            <span class="line-number" id="file-flowers-csv-L15" rel="file-flowers-csv-L15">15</span>
+            <span class="line-number" id="file-flowers-csv-L16" rel="file-flowers-csv-L16">16</span>
+            <span class="line-number" id="file-flowers-csv-L17" rel="file-flowers-csv-L17">17</span>
+            <span class="line-number" id="file-flowers-csv-L18" rel="file-flowers-csv-L18">18</span>
+            <span class="line-number" id="file-flowers-csv-L19" rel="file-flowers-csv-L19">19</span>
+            <span class="line-number" id="file-flowers-csv-L20" rel="file-flowers-csv-L20">20</span>
+            <span class="line-number" id="file-flowers-csv-L21" rel="file-flowers-csv-L21">21</span>
+            <span class="line-number" id="file-flowers-csv-L22" rel="file-flowers-csv-L22">22</span>
+            <span class="line-number" id="file-flowers-csv-L23" rel="file-flowers-csv-L23">23</span>
+            <span class="line-number" id="file-flowers-csv-L24" rel="file-flowers-csv-L24">24</span>
+            <span class="line-number" id="file-flowers-csv-L25" rel="file-flowers-csv-L25">25</span>
+            <span class="line-number" id="file-flowers-csv-L26" rel="file-flowers-csv-L26">26</span>
+            <span class="line-number" id="file-flowers-csv-L27" rel="file-flowers-csv-L27">27</span>
+            <span class="line-number" id="file-flowers-csv-L28" rel="file-flowers-csv-L28">28</span>
+            <span class="line-number" id="file-flowers-csv-L29" rel="file-flowers-csv-L29">29</span>
+            <span class="line-number" id="file-flowers-csv-L30" rel="file-flowers-csv-L30">30</span>
+            <span class="line-number" id="file-flowers-csv-L31" rel="file-flowers-csv-L31">31</span>
+            <span class="line-number" id="file-flowers-csv-L32" rel="file-flowers-csv-L32">32</span>
+            <span class="line-number" id="file-flowers-csv-L33" rel="file-flowers-csv-L33">33</span>
+            <span class="line-number" id="file-flowers-csv-L34" rel="file-flowers-csv-L34">34</span>
+            <span class="line-number" id="file-flowers-csv-L35" rel="file-flowers-csv-L35">35</span>
+            <span class="line-number" id="file-flowers-csv-L36" rel="file-flowers-csv-L36">36</span>
+            <span class="line-number" id="file-flowers-csv-L37" rel="file-flowers-csv-L37">37</span>
+            <span class="line-number" id="file-flowers-csv-L38" rel="file-flowers-csv-L38">38</span>
+            <span class="line-number" id="file-flowers-csv-L39" rel="file-flowers-csv-L39">39</span>
+            <span class="line-number" id="file-flowers-csv-L40" rel="file-flowers-csv-L40">40</span>
+            <span class="line-number" id="file-flowers-csv-L41" rel="file-flowers-csv-L41">41</span>
+            <span class="line-number" id="file-flowers-csv-L42" rel="file-flowers-csv-L42">42</span>
+            <span class="line-number" id="file-flowers-csv-L43" rel="file-flowers-csv-L43">43</span>
+            <span class="line-number" id="file-flowers-csv-L44" rel="file-flowers-csv-L44">44</span>
+            <span class="line-number" id="file-flowers-csv-L45" rel="file-flowers-csv-L45">45</span>
+            <span class="line-number" id="file-flowers-csv-L46" rel="file-flowers-csv-L46">46</span>
+            <span class="line-number" id="file-flowers-csv-L47" rel="file-flowers-csv-L47">47</span>
+            <span class="line-number" id="file-flowers-csv-L48" rel="file-flowers-csv-L48">48</span>
+            <span class="line-number" id="file-flowers-csv-L49" rel="file-flowers-csv-L49">49</span>
+            <span class="line-number" id="file-flowers-csv-L50" rel="file-flowers-csv-L50">50</span>
+            <span class="line-number" id="file-flowers-csv-L51" rel="file-flowers-csv-L51">51</span>
+            <span class="line-number" id="file-flowers-csv-L52" rel="file-flowers-csv-L52">52</span>
+            <span class="line-number" id="file-flowers-csv-L53" rel="file-flowers-csv-L53">53</span>
+            <span class="line-number" id="file-flowers-csv-L54" rel="file-flowers-csv-L54">54</span>
+            <span class="line-number" id="file-flowers-csv-L55" rel="file-flowers-csv-L55">55</span>
+            <span class="line-number" id="file-flowers-csv-L56" rel="file-flowers-csv-L56">56</span>
+            <span class="line-number" id="file-flowers-csv-L57" rel="file-flowers-csv-L57">57</span>
+            <span class="line-number" id="file-flowers-csv-L58" rel="file-flowers-csv-L58">58</span>
+            <span class="line-number" id="file-flowers-csv-L59" rel="file-flowers-csv-L59">59</span>
+            <span class="line-number" id="file-flowers-csv-L60" rel="file-flowers-csv-L60">60</span>
+            <span class="line-number" id="file-flowers-csv-L61" rel="file-flowers-csv-L61">61</span>
+            <span class="line-number" id="file-flowers-csv-L62" rel="file-flowers-csv-L62">62</span>
+            <span class="line-number" id="file-flowers-csv-L63" rel="file-flowers-csv-L63">63</span>
+            <span class="line-number" id="file-flowers-csv-L64" rel="file-flowers-csv-L64">64</span>
+            <span class="line-number" id="file-flowers-csv-L65" rel="file-flowers-csv-L65">65</span>
+            <span class="line-number" id="file-flowers-csv-L66" rel="file-flowers-csv-L66">66</span>
+            <span class="line-number" id="file-flowers-csv-L67" rel="file-flowers-csv-L67">67</span>
+            <span class="line-number" id="file-flowers-csv-L68" rel="file-flowers-csv-L68">68</span>
+            <span class="line-number" id="file-flowers-csv-L69" rel="file-flowers-csv-L69">69</span>
+            <span class="line-number" id="file-flowers-csv-L70" rel="file-flowers-csv-L70">70</span>
+            <span class="line-number" id="file-flowers-csv-L71" rel="file-flowers-csv-L71">71</span>
+            <span class="line-number" id="file-flowers-csv-L72" rel="file-flowers-csv-L72">72</span>
+            <span class="line-number" id="file-flowers-csv-L73" rel="file-flowers-csv-L73">73</span>
+            <span class="line-number" id="file-flowers-csv-L74" rel="file-flowers-csv-L74">74</span>
+            <span class="line-number" id="file-flowers-csv-L75" rel="file-flowers-csv-L75">75</span>
+            <span class="line-number" id="file-flowers-csv-L76" rel="file-flowers-csv-L76">76</span>
+            <span class="line-number" id="file-flowers-csv-L77" rel="file-flowers-csv-L77">77</span>
+            <span class="line-number" id="file-flowers-csv-L78" rel="file-flowers-csv-L78">78</span>
+            <span class="line-number" id="file-flowers-csv-L79" rel="file-flowers-csv-L79">79</span>
+            <span class="line-number" id="file-flowers-csv-L80" rel="file-flowers-csv-L80">80</span>
+            <span class="line-number" id="file-flowers-csv-L81" rel="file-flowers-csv-L81">81</span>
+            <span class="line-number" id="file-flowers-csv-L82" rel="file-flowers-csv-L82">82</span>
+            <span class="line-number" id="file-flowers-csv-L83" rel="file-flowers-csv-L83">83</span>
+            <span class="line-number" id="file-flowers-csv-L84" rel="file-flowers-csv-L84">84</span>
+            <span class="line-number" id="file-flowers-csv-L85" rel="file-flowers-csv-L85">85</span>
+            <span class="line-number" id="file-flowers-csv-L86" rel="file-flowers-csv-L86">86</span>
+            <span class="line-number" id="file-flowers-csv-L87" rel="file-flowers-csv-L87">87</span>
+            <span class="line-number" id="file-flowers-csv-L88" rel="file-flowers-csv-L88">88</span>
+            <span class="line-number" id="file-flowers-csv-L89" rel="file-flowers-csv-L89">89</span>
+            <span class="line-number" id="file-flowers-csv-L90" rel="file-flowers-csv-L90">90</span>
+            <span class="line-number" id="file-flowers-csv-L91" rel="file-flowers-csv-L91">91</span>
+            <span class="line-number" id="file-flowers-csv-L92" rel="file-flowers-csv-L92">92</span>
+            <span class="line-number" id="file-flowers-csv-L93" rel="file-flowers-csv-L93">93</span>
+            <span class="line-number" id="file-flowers-csv-L94" rel="file-flowers-csv-L94">94</span>
+            <span class="line-number" id="file-flowers-csv-L95" rel="file-flowers-csv-L95">95</span>
+            <span class="line-number" id="file-flowers-csv-L96" rel="file-flowers-csv-L96">96</span>
+            <span class="line-number" id="file-flowers-csv-L97" rel="file-flowers-csv-L97">97</span>
+            <span class="line-number" id="file-flowers-csv-L98" rel="file-flowers-csv-L98">98</span>
+            <span class="line-number" id="file-flowers-csv-L99" rel="file-flowers-csv-L99">99</span>
+            <span class="line-number" id="file-flowers-csv-L100" rel="file-flowers-csv-L100">100</span>
+            <span class="line-number" id="file-flowers-csv-L101" rel="file-flowers-csv-L101">101</span>
+            <span class="line-number" id="file-flowers-csv-L102" rel="file-flowers-csv-L102">102</span>
+            <span class="line-number" id="file-flowers-csv-L103" rel="file-flowers-csv-L103">103</span>
+            <span class="line-number" id="file-flowers-csv-L104" rel="file-flowers-csv-L104">104</span>
+            <span class="line-number" id="file-flowers-csv-L105" rel="file-flowers-csv-L105">105</span>
+            <span class="line-number" id="file-flowers-csv-L106" rel="file-flowers-csv-L106">106</span>
+            <span class="line-number" id="file-flowers-csv-L107" rel="file-flowers-csv-L107">107</span>
+            <span class="line-number" id="file-flowers-csv-L108" rel="file-flowers-csv-L108">108</span>
+            <span class="line-number" id="file-flowers-csv-L109" rel="file-flowers-csv-L109">109</span>
+            <span class="line-number" id="file-flowers-csv-L110" rel="file-flowers-csv-L110">110</span>
+            <span class="line-number" id="file-flowers-csv-L111" rel="file-flowers-csv-L111">111</span>
+            <span class="line-number" id="file-flowers-csv-L112" rel="file-flowers-csv-L112">112</span>
+            <span class="line-number" id="file-flowers-csv-L113" rel="file-flowers-csv-L113">113</span>
+            <span class="line-number" id="file-flowers-csv-L114" rel="file-flowers-csv-L114">114</span>
+            <span class="line-number" id="file-flowers-csv-L115" rel="file-flowers-csv-L115">115</span>
+            <span class="line-number" id="file-flowers-csv-L116" rel="file-flowers-csv-L116">116</span>
+            <span class="line-number" id="file-flowers-csv-L117" rel="file-flowers-csv-L117">117</span>
+            <span class="line-number" id="file-flowers-csv-L118" rel="file-flowers-csv-L118">118</span>
+            <span class="line-number" id="file-flowers-csv-L119" rel="file-flowers-csv-L119">119</span>
+            <span class="line-number" id="file-flowers-csv-L120" rel="file-flowers-csv-L120">120</span>
+            <span class="line-number" id="file-flowers-csv-L121" rel="file-flowers-csv-L121">121</span>
+            <span class="line-number" id="file-flowers-csv-L122" rel="file-flowers-csv-L122">122</span>
+            <span class="line-number" id="file-flowers-csv-L123" rel="file-flowers-csv-L123">123</span>
+            <span class="line-number" id="file-flowers-csv-L124" rel="file-flowers-csv-L124">124</span>
+            <span class="line-number" id="file-flowers-csv-L125" rel="file-flowers-csv-L125">125</span>
+            <span class="line-number" id="file-flowers-csv-L126" rel="file-flowers-csv-L126">126</span>
+            <span class="line-number" id="file-flowers-csv-L127" rel="file-flowers-csv-L127">127</span>
+            <span class="line-number" id="file-flowers-csv-L128" rel="file-flowers-csv-L128">128</span>
+            <span class="line-number" id="file-flowers-csv-L129" rel="file-flowers-csv-L129">129</span>
+            <span class="line-number" id="file-flowers-csv-L130" rel="file-flowers-csv-L130">130</span>
+            <span class="line-number" id="file-flowers-csv-L131" rel="file-flowers-csv-L131">131</span>
+            <span class="line-number" id="file-flowers-csv-L132" rel="file-flowers-csv-L132">132</span>
+            <span class="line-number" id="file-flowers-csv-L133" rel="file-flowers-csv-L133">133</span>
+            <span class="line-number" id="file-flowers-csv-L134" rel="file-flowers-csv-L134">134</span>
+            <span class="line-number" id="file-flowers-csv-L135" rel="file-flowers-csv-L135">135</span>
+            <span class="line-number" id="file-flowers-csv-L136" rel="file-flowers-csv-L136">136</span>
+            <span class="line-number" id="file-flowers-csv-L137" rel="file-flowers-csv-L137">137</span>
+            <span class="line-number" id="file-flowers-csv-L138" rel="file-flowers-csv-L138">138</span>
+            <span class="line-number" id="file-flowers-csv-L139" rel="file-flowers-csv-L139">139</span>
+            <span class="line-number" id="file-flowers-csv-L140" rel="file-flowers-csv-L140">140</span>
+            <span class="line-number" id="file-flowers-csv-L141" rel="file-flowers-csv-L141">141</span>
+            <span class="line-number" id="file-flowers-csv-L142" rel="file-flowers-csv-L142">142</span>
+            <span class="line-number" id="file-flowers-csv-L143" rel="file-flowers-csv-L143">143</span>
+            <span class="line-number" id="file-flowers-csv-L144" rel="file-flowers-csv-L144">144</span>
+            <span class="line-number" id="file-flowers-csv-L145" rel="file-flowers-csv-L145">145</span>
+            <span class="line-number" id="file-flowers-csv-L146" rel="file-flowers-csv-L146">146</span>
+            <span class="line-number" id="file-flowers-csv-L147" rel="file-flowers-csv-L147">147</span>
+            <span class="line-number" id="file-flowers-csv-L148" rel="file-flowers-csv-L148">148</span>
+            <span class="line-number" id="file-flowers-csv-L149" rel="file-flowers-csv-L149">149</span>
+            <span class="line-number" id="file-flowers-csv-L150" rel="file-flowers-csv-L150">150</span>
+            <span class="line-number" id="file-flowers-csv-L151" rel="file-flowers-csv-L151">151</span>
+          </td>
+          <td class="line-data">
+            <pre class="line-pre"><div class="line" id="file-flowers-csv-LC1">sepal length,sepal width,petal length,petal width,species
+</div><div class="line" id="file-flowers-csv-LC2">5.1,3.5,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC3">4.9,3.0,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC4">4.7,3.2,1.3,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC5">4.6,3.1,1.5,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC6">5.0,3.6,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC7">5.4,3.9,1.7,0.4,setosa
+</div><div class="line" id="file-flowers-csv-LC8">4.6,3.4,1.4,0.3,setosa
+</div><div class="line" id="file-flowers-csv-LC9">5.0,3.4,1.5,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC10">4.4,2.9,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC11">4.9,3.1,1.5,0.1,setosa
+</div><div class="line" id="file-flowers-csv-LC12">5.4,3.7,1.5,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC13">4.8,3.4,1.6,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC14">4.8,3.0,1.4,0.1,setosa
+</div><div class="line" id="file-flowers-csv-LC15">4.3,3.0,1.1,0.1,setosa
+</div><div class="line" id="file-flowers-csv-LC16">5.8,4.0,1.2,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC17">5.7,4.4,1.5,0.4,setosa
+</div><div class="line" id="file-flowers-csv-LC18">5.4,3.9,1.3,0.4,setosa
+</div><div class="line" id="file-flowers-csv-LC19">5.1,3.5,1.4,0.3,setosa
+</div><div class="line" id="file-flowers-csv-LC20">5.7,3.8,1.7,0.3,setosa
+</div><div class="line" id="file-flowers-csv-LC21">5.1,3.8,1.5,0.3,setosa
+</div><div class="line" id="file-flowers-csv-LC22">5.4,3.4,1.7,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC23">5.1,3.7,1.5,0.4,setosa
+</div><div class="line" id="file-flowers-csv-LC24">4.6,3.6,1.0,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC25">5.1,3.3,1.7,0.5,setosa
+</div><div class="line" id="file-flowers-csv-LC26">4.8,3.4,1.9,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC27">5.0,3.0,1.6,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC28">5.0,3.4,1.6,0.4,setosa
+</div><div class="line" id="file-flowers-csv-LC29">5.2,3.5,1.5,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC30">5.2,3.4,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC31">4.7,3.2,1.6,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC32">4.8,3.1,1.6,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC33">5.4,3.4,1.5,0.4,setosa
+</div><div class="line" id="file-flowers-csv-LC34">5.2,4.1,1.5,0.1,setosa
+</div><div class="line" id="file-flowers-csv-LC35">5.5,4.2,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC36">4.9,3.1,1.5,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC37">5.0,3.2,1.2,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC38">5.5,3.5,1.3,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC39">4.9,3.6,1.4,0.1,setosa
+</div><div class="line" id="file-flowers-csv-LC40">4.4,3.0,1.3,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC41">5.1,3.4,1.5,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC42">5.0,3.5,1.3,0.3,setosa
+</div><div class="line" id="file-flowers-csv-LC43">4.5,2.3,1.3,0.3,setosa
+</div><div class="line" id="file-flowers-csv-LC44">4.4,3.2,1.3,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC45">5.0,3.5,1.6,0.6,setosa
+</div><div class="line" id="file-flowers-csv-LC46">5.1,3.8,1.9,0.4,setosa
+</div><div class="line" id="file-flowers-csv-LC47">4.8,3.0,1.4,0.3,setosa
+</div><div class="line" id="file-flowers-csv-LC48">5.1,3.8,1.6,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC49">4.6,3.2,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC50">5.3,3.7,1.5,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC51">5.0,3.3,1.4,0.2,setosa
+</div><div class="line" id="file-flowers-csv-LC52">7.0,3.2,4.7,1.4,versicolor
+</div><div class="line" id="file-flowers-csv-LC53">6.4,3.2,4.5,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC54">6.9,3.1,4.9,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC55">5.5,2.3,4.0,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC56">6.5,2.8,4.6,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC57">5.7,2.8,4.5,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC58">6.3,3.3,4.7,1.6,versicolor
+</div><div class="line" id="file-flowers-csv-LC59">4.9,2.4,3.3,1.0,versicolor
+</div><div class="line" id="file-flowers-csv-LC60">6.6,2.9,4.6,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC61">5.2,2.7,3.9,1.4,versicolor
+</div><div class="line" id="file-flowers-csv-LC62">5.0,2.0,3.5,1.0,versicolor
+</div><div class="line" id="file-flowers-csv-LC63">5.9,3.0,4.2,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC64">6.0,2.2,4.0,1.0,versicolor
+</div><div class="line" id="file-flowers-csv-LC65">6.1,2.9,4.7,1.4,versicolor
+</div><div class="line" id="file-flowers-csv-LC66">5.6,2.9,3.6,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC67">6.7,3.1,4.4,1.4,versicolor
+</div><div class="line" id="file-flowers-csv-LC68">5.6,3.0,4.5,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC69">5.8,2.7,4.1,1.0,versicolor
+</div><div class="line" id="file-flowers-csv-LC70">6.2,2.2,4.5,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC71">5.6,2.5,3.9,1.1,versicolor
+</div><div class="line" id="file-flowers-csv-LC72">5.9,3.2,4.8,1.8,versicolor
+</div><div class="line" id="file-flowers-csv-LC73">6.1,2.8,4.0,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC74">6.3,2.5,4.9,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC75">6.1,2.8,4.7,1.2,versicolor
+</div><div class="line" id="file-flowers-csv-LC76">6.4,2.9,4.3,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC77">6.6,3.0,4.4,1.4,versicolor
+</div><div class="line" id="file-flowers-csv-LC78">6.8,2.8,4.8,1.4,versicolor
+</div><div class="line" id="file-flowers-csv-LC79">6.7,3.0,5.0,1.7,versicolor
+</div><div class="line" id="file-flowers-csv-LC80">6.0,2.9,4.5,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC81">5.7,2.6,3.5,1.0,versicolor
+</div><div class="line" id="file-flowers-csv-LC82">5.5,2.4,3.8,1.1,versicolor
+</div><div class="line" id="file-flowers-csv-LC83">5.5,2.4,3.7,1.0,versicolor
+</div><div class="line" id="file-flowers-csv-LC84">5.8,2.7,3.9,1.2,versicolor
+</div><div class="line" id="file-flowers-csv-LC85">6.0,2.7,5.1,1.6,versicolor
+</div><div class="line" id="file-flowers-csv-LC86">5.4,3.0,4.5,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC87">6.0,3.4,4.5,1.6,versicolor
+</div><div class="line" id="file-flowers-csv-LC88">6.7,3.1,4.7,1.5,versicolor
+</div><div class="line" id="file-flowers-csv-LC89">6.3,2.3,4.4,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC90">5.6,3.0,4.1,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC91">5.5,2.5,4.0,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC92">5.5,2.6,4.4,1.2,versicolor
+</div><div class="line" id="file-flowers-csv-LC93">6.1,3.0,4.6,1.4,versicolor
+</div><div class="line" id="file-flowers-csv-LC94">5.8,2.6,4.0,1.2,versicolor
+</div><div class="line" id="file-flowers-csv-LC95">5.0,2.3,3.3,1.0,versicolor
+</div><div class="line" id="file-flowers-csv-LC96">5.6,2.7,4.2,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC97">5.7,3.0,4.2,1.2,versicolor
+</div><div class="line" id="file-flowers-csv-LC98">5.7,2.9,4.2,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC99">6.2,2.9,4.3,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC100">5.1,2.5,3.0,1.1,versicolor
+</div><div class="line" id="file-flowers-csv-LC101">5.7,2.8,4.1,1.3,versicolor
+</div><div class="line" id="file-flowers-csv-LC102">6.3,3.3,6.0,2.5,virginica
+</div><div class="line" id="file-flowers-csv-LC103">5.8,2.7,5.1,1.9,virginica
+</div><div class="line" id="file-flowers-csv-LC104">7.1,3.0,5.9,2.1,virginica
+</div><div class="line" id="file-flowers-csv-LC105">6.3,2.9,5.6,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC106">6.5,3.0,5.8,2.2,virginica
+</div><div class="line" id="file-flowers-csv-LC107">7.6,3.0,6.6,2.1,virginica
+</div><div class="line" id="file-flowers-csv-LC108">4.9,2.5,4.5,1.7,virginica
+</div><div class="line" id="file-flowers-csv-LC109">7.3,2.9,6.3,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC110">6.7,2.5,5.8,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC111">7.2,3.6,6.1,2.5,virginica
+</div><div class="line" id="file-flowers-csv-LC112">6.5,3.2,5.1,2.0,virginica
+</div><div class="line" id="file-flowers-csv-LC113">6.4,2.7,5.3,1.9,virginica
+</div><div class="line" id="file-flowers-csv-LC114">6.8,3.0,5.5,2.1,virginica
+</div><div class="line" id="file-flowers-csv-LC115">5.7,2.5,5.0,2.0,virginica
+</div><div class="line" id="file-flowers-csv-LC116">5.8,2.8,5.1,2.4,virginica
+</div><div class="line" id="file-flowers-csv-LC117">6.4,3.2,5.3,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC118">6.5,3.0,5.5,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC119">7.7,3.8,6.7,2.2,virginica
+</div><div class="line" id="file-flowers-csv-LC120">7.7,2.6,6.9,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC121">6.0,2.2,5.0,1.5,virginica
+</div><div class="line" id="file-flowers-csv-LC122">6.9,3.2,5.7,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC123">5.6,2.8,4.9,2.0,virginica
+</div><div class="line" id="file-flowers-csv-LC124">7.7,2.8,6.7,2.0,virginica
+</div><div class="line" id="file-flowers-csv-LC125">6.3,2.7,4.9,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC126">6.7,3.3,5.7,2.1,virginica
+</div><div class="line" id="file-flowers-csv-LC127">7.2,3.2,6.0,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC128">6.2,2.8,4.8,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC129">6.1,3.0,4.9,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC130">6.4,2.8,5.6,2.1,virginica
+</div><div class="line" id="file-flowers-csv-LC131">7.2,3.0,5.8,1.6,virginica
+</div><div class="line" id="file-flowers-csv-LC132">7.4,2.8,6.1,1.9,virginica
+</div><div class="line" id="file-flowers-csv-LC133">7.9,3.8,6.4,2.0,virginica
+</div><div class="line" id="file-flowers-csv-LC134">6.4,2.8,5.6,2.2,virginica
+</div><div class="line" id="file-flowers-csv-LC135">6.3,2.8,5.1,1.5,virginica
+</div><div class="line" id="file-flowers-csv-LC136">6.1,2.6,5.6,1.4,virginica
+</div><div class="line" id="file-flowers-csv-LC137">7.7,3.0,6.1,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC138">6.3,3.4,5.6,2.4,virginica
+</div><div class="line" id="file-flowers-csv-LC139">6.4,3.1,5.5,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC140">6.0,3.0,4.8,1.8,virginica
+</div><div class="line" id="file-flowers-csv-LC141">6.9,3.1,5.4,2.1,virginica
+</div><div class="line" id="file-flowers-csv-LC142">6.7,3.1,5.6,2.4,virginica
+</div><div class="line" id="file-flowers-csv-LC143">6.9,3.1,5.1,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC144">5.8,2.7,5.1,1.9,virginica
+</div><div class="line" id="file-flowers-csv-LC145">6.8,3.2,5.9,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC146">6.7,3.3,5.7,2.5,virginica
+</div><div class="line" id="file-flowers-csv-LC147">6.7,3.0,5.2,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC148">6.3,2.5,5.0,1.9,virginica
+</div><div class="line" id="file-flowers-csv-LC149">6.5,3.0,5.2,2.0,virginica
+</div><div class="line" id="file-flowers-csv-LC150">6.2,3.4,5.4,2.3,virginica
+</div><div class="line" id="file-flowers-csv-LC151">5.9,3.0,5.1,1.8,virginica
+</div></pre>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+
+  </div>
+</div>
+
+            <div id="file-index-html" class="file ">
+    <a href="./Scatterplot Matrix Brushing2_files/Scatterplot Matrix Brushing2.html" class="link-overlay">
+    <span class="link">View <strong>README.md</strong> <span class="octicon octicon-arrow-right"></span></span>
+  </a>
+  <div class="meta clearfix">
+    <div class="info file-name">
+      <span class="icon">
+        <b class="octicon octicon-gist"></b>
+      </span>
+      <a aria-label="Permalink" href="https://gist.github.com/mbostock/4063663#file-index-html" class="tooltipped tooltipped-s permalink"><strong class="file-name js-selectable-text">index.html</strong></a>
+    </div>
+    <div class="actions">
+      <div class="button-group">
+        <a aria-label="View Raw" href="https://gist.github.com/mbostock/4063663/raw/53b8f8beb67c484ee801138e23d7b2ceefc147b1/index.html" data-skip-pjax="" class="minibutton raw-url js-view-raw">Raw</a>
+      </div>
+    </div>
+  </div>
+  <div class="suppressed">
+    <a class="js-show-suppressed-file">File suppressed. Click to show.</a>
+  </div>
+  <div class="blob-wrapper data type-html js-blob-data">
+    
+
+
+
+    <div class="file-data">
+      <table cellpadding="0" cellspacing="0" class="lines highlight">
+        <tbody><tr>
+          <td class="line-numbers">
+            <span class="line-number" id="file-index-html-L1" rel="file-index-html-L1">1</span>
+            <span class="line-number" id="file-index-html-L2" rel="file-index-html-L2">2</span>
+            <span class="line-number" id="file-index-html-L3" rel="file-index-html-L3">3</span>
+            <span class="line-number" id="file-index-html-L4" rel="file-index-html-L4">4</span>
+            <span class="line-number" id="file-index-html-L5" rel="file-index-html-L5">5</span>
+            <span class="line-number" id="file-index-html-L6" rel="file-index-html-L6">6</span>
+            <span class="line-number" id="file-index-html-L7" rel="file-index-html-L7">7</span>
+            <span class="line-number" id="file-index-html-L8" rel="file-index-html-L8">8</span>
+            <span class="line-number" id="file-index-html-L9" rel="file-index-html-L9">9</span>
+            <span class="line-number" id="file-index-html-L10" rel="file-index-html-L10">10</span>
+            <span class="line-number" id="file-index-html-L11" rel="file-index-html-L11">11</span>
+            <span class="line-number" id="file-index-html-L12" rel="file-index-html-L12">12</span>
+            <span class="line-number" id="file-index-html-L13" rel="file-index-html-L13">13</span>
+            <span class="line-number" id="file-index-html-L14" rel="file-index-html-L14">14</span>
+            <span class="line-number" id="file-index-html-L15" rel="file-index-html-L15">15</span>
+            <span class="line-number" id="file-index-html-L16" rel="file-index-html-L16">16</span>
+            <span class="line-number" id="file-index-html-L17" rel="file-index-html-L17">17</span>
+            <span class="line-number" id="file-index-html-L18" rel="file-index-html-L18">18</span>
+            <span class="line-number" id="file-index-html-L19" rel="file-index-html-L19">19</span>
+            <span class="line-number" id="file-index-html-L20" rel="file-index-html-L20">20</span>
+            <span class="line-number" id="file-index-html-L21" rel="file-index-html-L21">21</span>
+            <span class="line-number" id="file-index-html-L22" rel="file-index-html-L22">22</span>
+            <span class="line-number" id="file-index-html-L23" rel="file-index-html-L23">23</span>
+            <span class="line-number" id="file-index-html-L24" rel="file-index-html-L24">24</span>
+            <span class="line-number" id="file-index-html-L25" rel="file-index-html-L25">25</span>
+            <span class="line-number" id="file-index-html-L26" rel="file-index-html-L26">26</span>
+            <span class="line-number" id="file-index-html-L27" rel="file-index-html-L27">27</span>
+            <span class="line-number" id="file-index-html-L28" rel="file-index-html-L28">28</span>
+            <span class="line-number" id="file-index-html-L29" rel="file-index-html-L29">29</span>
+            <span class="line-number" id="file-index-html-L30" rel="file-index-html-L30">30</span>
+            <span class="line-number" id="file-index-html-L31" rel="file-index-html-L31">31</span>
+            <span class="line-number" id="file-index-html-L32" rel="file-index-html-L32">32</span>
+            <span class="line-number" id="file-index-html-L33" rel="file-index-html-L33">33</span>
+            <span class="line-number" id="file-index-html-L34" rel="file-index-html-L34">34</span>
+            <span class="line-number" id="file-index-html-L35" rel="file-index-html-L35">35</span>
+            <span class="line-number" id="file-index-html-L36" rel="file-index-html-L36">36</span>
+            <span class="line-number" id="file-index-html-L37" rel="file-index-html-L37">37</span>
+            <span class="line-number" id="file-index-html-L38" rel="file-index-html-L38">38</span>
+            <span class="line-number" id="file-index-html-L39" rel="file-index-html-L39">39</span>
+            <span class="line-number" id="file-index-html-L40" rel="file-index-html-L40">40</span>
+            <span class="line-number" id="file-index-html-L41" rel="file-index-html-L41">41</span>
+            <span class="line-number" id="file-index-html-L42" rel="file-index-html-L42">42</span>
+            <span class="line-number" id="file-index-html-L43" rel="file-index-html-L43">43</span>
+            <span class="line-number" id="file-index-html-L44" rel="file-index-html-L44">44</span>
+            <span class="line-number" id="file-index-html-L45" rel="file-index-html-L45">45</span>
+            <span class="line-number" id="file-index-html-L46" rel="file-index-html-L46">46</span>
+            <span class="line-number" id="file-index-html-L47" rel="file-index-html-L47">47</span>
+            <span class="line-number" id="file-index-html-L48" rel="file-index-html-L48">48</span>
+            <span class="line-number" id="file-index-html-L49" rel="file-index-html-L49">49</span>
+            <span class="line-number" id="file-index-html-L50" rel="file-index-html-L50">50</span>
+            <span class="line-number" id="file-index-html-L51" rel="file-index-html-L51">51</span>
+            <span class="line-number" id="file-index-html-L52" rel="file-index-html-L52">52</span>
+            <span class="line-number" id="file-index-html-L53" rel="file-index-html-L53">53</span>
+            <span class="line-number" id="file-index-html-L54" rel="file-index-html-L54">54</span>
+            <span class="line-number" id="file-index-html-L55" rel="file-index-html-L55">55</span>
+            <span class="line-number" id="file-index-html-L56" rel="file-index-html-L56">56</span>
+            <span class="line-number" id="file-index-html-L57" rel="file-index-html-L57">57</span>
+            <span class="line-number" id="file-index-html-L58" rel="file-index-html-L58">58</span>
+            <span class="line-number" id="file-index-html-L59" rel="file-index-html-L59">59</span>
+            <span class="line-number" id="file-index-html-L60" rel="file-index-html-L60">60</span>
+            <span class="line-number" id="file-index-html-L61" rel="file-index-html-L61">61</span>
+            <span class="line-number" id="file-index-html-L62" rel="file-index-html-L62">62</span>
+            <span class="line-number" id="file-index-html-L63" rel="file-index-html-L63">63</span>
+            <span class="line-number" id="file-index-html-L64" rel="file-index-html-L64">64</span>
+            <span class="line-number" id="file-index-html-L65" rel="file-index-html-L65">65</span>
+            <span class="line-number" id="file-index-html-L66" rel="file-index-html-L66">66</span>
+            <span class="line-number" id="file-index-html-L67" rel="file-index-html-L67">67</span>
+            <span class="line-number" id="file-index-html-L68" rel="file-index-html-L68">68</span>
+            <span class="line-number" id="file-index-html-L69" rel="file-index-html-L69">69</span>
+            <span class="line-number" id="file-index-html-L70" rel="file-index-html-L70">70</span>
+            <span class="line-number" id="file-index-html-L71" rel="file-index-html-L71">71</span>
+            <span class="line-number" id="file-index-html-L72" rel="file-index-html-L72">72</span>
+            <span class="line-number" id="file-index-html-L73" rel="file-index-html-L73">73</span>
+            <span class="line-number" id="file-index-html-L74" rel="file-index-html-L74">74</span>
+            <span class="line-number" id="file-index-html-L75" rel="file-index-html-L75">75</span>
+            <span class="line-number" id="file-index-html-L76" rel="file-index-html-L76">76</span>
+            <span class="line-number" id="file-index-html-L77" rel="file-index-html-L77">77</span>
+            <span class="line-number" id="file-index-html-L78" rel="file-index-html-L78">78</span>
+            <span class="line-number" id="file-index-html-L79" rel="file-index-html-L79">79</span>
+            <span class="line-number" id="file-index-html-L80" rel="file-index-html-L80">80</span>
+            <span class="line-number" id="file-index-html-L81" rel="file-index-html-L81">81</span>
+            <span class="line-number" id="file-index-html-L82" rel="file-index-html-L82">82</span>
+            <span class="line-number" id="file-index-html-L83" rel="file-index-html-L83">83</span>
+            <span class="line-number" id="file-index-html-L84" rel="file-index-html-L84">84</span>
+            <span class="line-number" id="file-index-html-L85" rel="file-index-html-L85">85</span>
+            <span class="line-number" id="file-index-html-L86" rel="file-index-html-L86">86</span>
+            <span class="line-number" id="file-index-html-L87" rel="file-index-html-L87">87</span>
+            <span class="line-number" id="file-index-html-L88" rel="file-index-html-L88">88</span>
+            <span class="line-number" id="file-index-html-L89" rel="file-index-html-L89">89</span>
+            <span class="line-number" id="file-index-html-L90" rel="file-index-html-L90">90</span>
+            <span class="line-number" id="file-index-html-L91" rel="file-index-html-L91">91</span>
+            <span class="line-number" id="file-index-html-L92" rel="file-index-html-L92">92</span>
+            <span class="line-number" id="file-index-html-L93" rel="file-index-html-L93">93</span>
+            <span class="line-number" id="file-index-html-L94" rel="file-index-html-L94">94</span>
+            <span class="line-number" id="file-index-html-L95" rel="file-index-html-L95">95</span>
+            <span class="line-number" id="file-index-html-L96" rel="file-index-html-L96">96</span>
+            <span class="line-number" id="file-index-html-L97" rel="file-index-html-L97">97</span>
+            <span class="line-number" id="file-index-html-L98" rel="file-index-html-L98">98</span>
+            <span class="line-number" id="file-index-html-L99" rel="file-index-html-L99">99</span>
+            <span class="line-number" id="file-index-html-L100" rel="file-index-html-L100">100</span>
+            <span class="line-number" id="file-index-html-L101" rel="file-index-html-L101">101</span>
+            <span class="line-number" id="file-index-html-L102" rel="file-index-html-L102">102</span>
+            <span class="line-number" id="file-index-html-L103" rel="file-index-html-L103">103</span>
+            <span class="line-number" id="file-index-html-L104" rel="file-index-html-L104">104</span>
+            <span class="line-number" id="file-index-html-L105" rel="file-index-html-L105">105</span>
+            <span class="line-number" id="file-index-html-L106" rel="file-index-html-L106">106</span>
+            <span class="line-number" id="file-index-html-L107" rel="file-index-html-L107">107</span>
+            <span class="line-number" id="file-index-html-L108" rel="file-index-html-L108">108</span>
+            <span class="line-number" id="file-index-html-L109" rel="file-index-html-L109">109</span>
+            <span class="line-number" id="file-index-html-L110" rel="file-index-html-L110">110</span>
+            <span class="line-number" id="file-index-html-L111" rel="file-index-html-L111">111</span>
+            <span class="line-number" id="file-index-html-L112" rel="file-index-html-L112">112</span>
+            <span class="line-number" id="file-index-html-L113" rel="file-index-html-L113">113</span>
+            <span class="line-number" id="file-index-html-L114" rel="file-index-html-L114">114</span>
+            <span class="line-number" id="file-index-html-L115" rel="file-index-html-L115">115</span>
+            <span class="line-number" id="file-index-html-L116" rel="file-index-html-L116">116</span>
+            <span class="line-number" id="file-index-html-L117" rel="file-index-html-L117">117</span>
+            <span class="line-number" id="file-index-html-L118" rel="file-index-html-L118">118</span>
+            <span class="line-number" id="file-index-html-L119" rel="file-index-html-L119">119</span>
+            <span class="line-number" id="file-index-html-L120" rel="file-index-html-L120">120</span>
+            <span class="line-number" id="file-index-html-L121" rel="file-index-html-L121">121</span>
+            <span class="line-number" id="file-index-html-L122" rel="file-index-html-L122">122</span>
+            <span class="line-number" id="file-index-html-L123" rel="file-index-html-L123">123</span>
+            <span class="line-number" id="file-index-html-L124" rel="file-index-html-L124">124</span>
+            <span class="line-number" id="file-index-html-L125" rel="file-index-html-L125">125</span>
+            <span class="line-number" id="file-index-html-L126" rel="file-index-html-L126">126</span>
+            <span class="line-number" id="file-index-html-L127" rel="file-index-html-L127">127</span>
+            <span class="line-number" id="file-index-html-L128" rel="file-index-html-L128">128</span>
+            <span class="line-number" id="file-index-html-L129" rel="file-index-html-L129">129</span>
+            <span class="line-number" id="file-index-html-L130" rel="file-index-html-L130">130</span>
+            <span class="line-number" id="file-index-html-L131" rel="file-index-html-L131">131</span>
+            <span class="line-number" id="file-index-html-L132" rel="file-index-html-L132">132</span>
+            <span class="line-number" id="file-index-html-L133" rel="file-index-html-L133">133</span>
+            <span class="line-number" id="file-index-html-L134" rel="file-index-html-L134">134</span>
+            <span class="line-number" id="file-index-html-L135" rel="file-index-html-L135">135</span>
+            <span class="line-number" id="file-index-html-L136" rel="file-index-html-L136">136</span>
+            <span class="line-number" id="file-index-html-L137" rel="file-index-html-L137">137</span>
+            <span class="line-number" id="file-index-html-L138" rel="file-index-html-L138">138</span>
+            <span class="line-number" id="file-index-html-L139" rel="file-index-html-L139">139</span>
+            <span class="line-number" id="file-index-html-L140" rel="file-index-html-L140">140</span>
+            <span class="line-number" id="file-index-html-L141" rel="file-index-html-L141">141</span>
+            <span class="line-number" id="file-index-html-L142" rel="file-index-html-L142">142</span>
+            <span class="line-number" id="file-index-html-L143" rel="file-index-html-L143">143</span>
+            <span class="line-number" id="file-index-html-L144" rel="file-index-html-L144">144</span>
+            <span class="line-number" id="file-index-html-L145" rel="file-index-html-L145">145</span>
+            <span class="line-number" id="file-index-html-L146" rel="file-index-html-L146">146</span>
+            <span class="line-number" id="file-index-html-L147" rel="file-index-html-L147">147</span>
+            <span class="line-number" id="file-index-html-L148" rel="file-index-html-L148">148</span>
+            <span class="line-number" id="file-index-html-L149" rel="file-index-html-L149">149</span>
+            <span class="line-number" id="file-index-html-L150" rel="file-index-html-L150">150</span>
+            <span class="line-number" id="file-index-html-L151" rel="file-index-html-L151">151</span>
+            <span class="line-number" id="file-index-html-L152" rel="file-index-html-L152">152</span>
+            <span class="line-number" id="file-index-html-L153" rel="file-index-html-L153">153</span>
+            <span class="line-number" id="file-index-html-L154" rel="file-index-html-L154">154</span>
+            <span class="line-number" id="file-index-html-L155" rel="file-index-html-L155">155</span>
+            <span class="line-number" id="file-index-html-L156" rel="file-index-html-L156">156</span>
+            <span class="line-number" id="file-index-html-L157" rel="file-index-html-L157">157</span>
+            <span class="line-number" id="file-index-html-L158" rel="file-index-html-L158">158</span>
+            <span class="line-number" id="file-index-html-L159" rel="file-index-html-L159">159</span>
+            <span class="line-number" id="file-index-html-L160" rel="file-index-html-L160">160</span>
+            <span class="line-number" id="file-index-html-L161" rel="file-index-html-L161">161</span>
+            <span class="line-number" id="file-index-html-L162" rel="file-index-html-L162">162</span>
+            <span class="line-number" id="file-index-html-L163" rel="file-index-html-L163">163</span>
+            <span class="line-number" id="file-index-html-L164" rel="file-index-html-L164">164</span>
+            <span class="line-number" id="file-index-html-L165" rel="file-index-html-L165">165</span>
+            <span class="line-number" id="file-index-html-L166" rel="file-index-html-L166">166</span>
+            <span class="line-number" id="file-index-html-L167" rel="file-index-html-L167">167</span>
+            <span class="line-number" id="file-index-html-L168" rel="file-index-html-L168">168</span>
+            <span class="line-number" id="file-index-html-L169" rel="file-index-html-L169">169</span>
+            <span class="line-number" id="file-index-html-L170" rel="file-index-html-L170">170</span>
+            <span class="line-number" id="file-index-html-L171" rel="file-index-html-L171">171</span>
+            <span class="line-number" id="file-index-html-L172" rel="file-index-html-L172">172</span>
+            <span class="line-number" id="file-index-html-L173" rel="file-index-html-L173">173</span>
+            <span class="line-number" id="file-index-html-L174" rel="file-index-html-L174">174</span>
+            <span class="line-number" id="file-index-html-L175" rel="file-index-html-L175">175</span>
+            <span class="line-number" id="file-index-html-L176" rel="file-index-html-L176">176</span>
+            <span class="line-number" id="file-index-html-L177" rel="file-index-html-L177">177</span>
+            <span class="line-number" id="file-index-html-L178" rel="file-index-html-L178">178</span>
+            <span class="line-number" id="file-index-html-L179" rel="file-index-html-L179">179</span>
+            <span class="line-number" id="file-index-html-L180" rel="file-index-html-L180">180</span>
+            <span class="line-number" id="file-index-html-L181" rel="file-index-html-L181">181</span>
+          </td>
+          <td class="line-data">
+            <pre class="line-pre"><div class="line" id="file-index-html-LC1">&lt;!DOCTYPE html&gt;
+</div><div class="line" id="file-index-html-LC2">&lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s1"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>&gt;
+</div><div class="line" id="file-index-html-LC3"><span class="pl-s2">&lt;<span class="pl-ent">style</span>&gt;</span>
+</div><div class="line" id="file-index-html-LC4"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC5"><span class="pl-s2">svg {</span>
+</div><div class="line" id="file-index-html-LC6"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">font</span></span>: <span class="pl-c1">10<span class="pl-k">px</span></span> <span class="pl-sc">sans-serif</span>;</span>
+</div><div class="line" id="file-index-html-LC7"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">padding</span></span>: <span class="pl-c1">10<span class="pl-k">px</span></span>;</span>
+</div><div class="line" id="file-index-html-LC8"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC9"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC10"><span class="pl-s2"><span class="pl-e">.axis</span>,</span>
+</div><div class="line" id="file-index-html-LC11"><span class="pl-s2"><span class="pl-e">.frame</span> {</span>
+</div><div class="line" id="file-index-html-LC12"><span class="pl-s2">  <span class="pl-mp">shape-rendering</span>: crispEdges;</span>
+</div><div class="line" id="file-index-html-LC13"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC14"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC15"><span class="pl-s2"><span class="pl-e">.axis</span> line {</span>
+</div><div class="line" id="file-index-html-LC16"><span class="pl-s2">  <span class="pl-mp">stroke</span>: <span class="pl-c1">#ddd</span>;</span>
+</div><div class="line" id="file-index-html-LC17"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC18"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC19"><span class="pl-s2"><span class="pl-e">.axis</span> path {</span>
+</div><div class="line" id="file-index-html-LC20"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">display</span></span>: <span class="pl-sc">none</span>;</span>
+</div><div class="line" id="file-index-html-LC21"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC22"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC23"><span class="pl-s2"><span class="pl-e">.frame</span> {</span>
+</div><div class="line" id="file-index-html-LC24"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">fill</span></span>: <span class="pl-sc">none</span>;</span>
+</div><div class="line" id="file-index-html-LC25"><span class="pl-s2">  <span class="pl-mp">stroke</span>: <span class="pl-c1">#aaa</span>;</span>
+</div><div class="line" id="file-index-html-LC26"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC27"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC28"><span class="pl-s2">circle {</span>
+</div><div class="line" id="file-index-html-LC29"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">fill</span>-<span class="pl-s3">opacity</span></span>: <span class="pl-c1">.7</span>;</span>
+</div><div class="line" id="file-index-html-LC30"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC31"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC32"><span class="pl-s2">circle<span class="pl-e">.hidden</span> {</span>
+</div><div class="line" id="file-index-html-LC33"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">fill</span></span>: <span class="pl-c1">#ccc</span> <span class="pl-k">!important</span>;</span>
+</div><div class="line" id="file-index-html-LC34"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC35"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC36"><span class="pl-s2"><span class="pl-e">.extent</span> {</span>
+</div><div class="line" id="file-index-html-LC37"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">fill</span></span>: <span class="pl-c1">#000</span>;</span>
+</div><div class="line" id="file-index-html-LC38"><span class="pl-s2">  <span class="pl-mp"><span class="pl-s3">fill</span>-<span class="pl-s3">opacity</span></span>: <span class="pl-c1">.125</span>;</span>
+</div><div class="line" id="file-index-html-LC39"><span class="pl-s2">  <span class="pl-mp">stroke</span>: <span class="pl-c1">#fff</span>;</span>
+</div><div class="line" id="file-index-html-LC40"><span class="pl-s2">}</span>
+</div><div class="line" id="file-index-html-LC41"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC42"><span class="pl-s2">&lt;/<span class="pl-ent">style</span>&gt;</span>
+</div><div class="line" id="file-index-html-LC43">&lt;<span class="pl-ent">body</span>&gt;
+</div><div class="line" id="file-index-html-LC44">&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s1"><span class="pl-pds">"</span>http://d3js.org/d3.v3.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+</div><div class="line" id="file-index-html-LC45"><span class="pl-s2">&lt;<span class="pl-ent">script</span>&gt;</span>
+</div><div class="line" id="file-index-html-LC46"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC47"><span class="pl-s2"><span class="pl-s">var</span> width <span class="pl-k">=</span> <span class="pl-c1">960</span>,</span>
+</div><div class="line" id="file-index-html-LC48"><span class="pl-s2">    size <span class="pl-k">=</span> <span class="pl-c1">150</span>,</span>
+</div><div class="line" id="file-index-html-LC49"><span class="pl-s2">    padding <span class="pl-k">=</span> <span class="pl-c1">19.5</span>;</span>
+</div><div class="line" id="file-index-html-LC50"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC51"><span class="pl-s2"><span class="pl-s">var</span> x <span class="pl-k">=</span> d3.scale.linear()</span>
+</div><div class="line" id="file-index-html-LC52"><span class="pl-s2">    .range([padding / <span class="pl-c1">2</span>, size <span class="pl-k">-</span> padding / <span class="pl-c1">2</span>]);</span>
+</div><div class="line" id="file-index-html-LC53"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC54"><span class="pl-s2"><span class="pl-s">var</span> y <span class="pl-k">=</span> d3.scale.linear()</span>
+</div><div class="line" id="file-index-html-LC55"><span class="pl-s2">    .range([size <span class="pl-k">-</span> padding / <span class="pl-c1">2</span>, padding / <span class="pl-c1">2</span>]);</span>
+</div><div class="line" id="file-index-html-LC56"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC57"><span class="pl-s2"><span class="pl-s">var</span> xAxis <span class="pl-k">=</span> d3.svg.<span class="pl-sc">axis</span>()</span>
+</div><div class="line" id="file-index-html-LC58"><span class="pl-s2">    .scale(x)</span>
+</div><div class="line" id="file-index-html-LC59"><span class="pl-s2">    .orient(<span class="pl-s1"><span class="pl-pds">"</span>bottom<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC60"><span class="pl-s2">    .ticks(<span class="pl-c1">5</span>);</span>
+</div><div class="line" id="file-index-html-LC61"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC62"><span class="pl-s2"><span class="pl-s">var</span> yAxis <span class="pl-k">=</span> d3.svg.<span class="pl-sc">axis</span>()</span>
+</div><div class="line" id="file-index-html-LC63"><span class="pl-s2">    .scale(y)</span>
+</div><div class="line" id="file-index-html-LC64"><span class="pl-s2">    .orient(<span class="pl-s1"><span class="pl-pds">"</span>left<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC65"><span class="pl-s2">    .ticks(<span class="pl-c1">5</span>);</span>
+</div><div class="line" id="file-index-html-LC66"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC67"><span class="pl-s2"><span class="pl-s">var</span> color <span class="pl-k">=</span> d3.scale.category10();</span>
+</div><div class="line" id="file-index-html-LC68"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC69"><span class="pl-s2">d3.csv(<span class="pl-s1"><span class="pl-pds">"</span>flowers.csv<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">error</span>, <span class="pl-vpf">data</span>) {</span>
+</div><div class="line" id="file-index-html-LC70"><span class="pl-s2">  <span class="pl-s">var</span> domainByTrait <span class="pl-k">=</span> {},</span>
+</div><div class="line" id="file-index-html-LC71"><span class="pl-s2">      traits <span class="pl-k">=</span> d3.keys(data[<span class="pl-c1">0</span>]).filter(<span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> d <span class="pl-k">!==</span> <span class="pl-s1"><span class="pl-pds">"</span>species<span class="pl-pds">"</span></span>; }),</span>
+</div><div class="line" id="file-index-html-LC72"><span class="pl-s2">      n <span class="pl-k">=</span> traits.<span class="pl-sc">length</span>;</span>
+</div><div class="line" id="file-index-html-LC73"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC74"><span class="pl-s2">  traits.forEach(<span class="pl-st">function</span>(<span class="pl-vpf">trait</span>) {</span>
+</div><div class="line" id="file-index-html-LC75"><span class="pl-s2">    domainByTrait[trait] <span class="pl-k">=</span> d3.extent(data, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> d[trait]; });</span>
+</div><div class="line" id="file-index-html-LC76"><span class="pl-s2">  });</span>
+</div><div class="line" id="file-index-html-LC77"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC78"><span class="pl-s2">  xAxis.tickSize(size <span class="pl-k">*</span> n);</span>
+</div><div class="line" id="file-index-html-LC79"><span class="pl-s2">  yAxis.tickSize(<span class="pl-k">-</span>size <span class="pl-k">*</span> n);</span>
+</div><div class="line" id="file-index-html-LC80"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC81"><span class="pl-s2">  <span class="pl-s">var</span> brush <span class="pl-k">=</span> d3.svg.brush()</span>
+</div><div class="line" id="file-index-html-LC82"><span class="pl-s2">      .<span class="pl-sc">x</span>(x)</span>
+</div><div class="line" id="file-index-html-LC83"><span class="pl-s2">      .<span class="pl-sc">y</span>(y)</span>
+</div><div class="line" id="file-index-html-LC84"><span class="pl-s2">      .on(<span class="pl-s1"><span class="pl-pds">"</span>brushstart<span class="pl-pds">"</span></span>, brushstart)</span>
+</div><div class="line" id="file-index-html-LC85"><span class="pl-s2">      .on(<span class="pl-s1"><span class="pl-pds">"</span>brush<span class="pl-pds">"</span></span>, brushmove)</span>
+</div><div class="line" id="file-index-html-LC86"><span class="pl-s2">      .on(<span class="pl-s1"><span class="pl-pds">"</span>brushend<span class="pl-pds">"</span></span>, brushend);</span>
+</div><div class="line" id="file-index-html-LC87"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC88"><span class="pl-s2">  <span class="pl-s">var</span> svg <span class="pl-k">=</span> d3.<span class="pl-s3">select</span>(<span class="pl-s1"><span class="pl-pds">"</span>body<span class="pl-pds">"</span></span>).append(<span class="pl-s1"><span class="pl-pds">"</span>svg<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC89"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>width<span class="pl-pds">"</span></span>, size <span class="pl-k">*</span> n <span class="pl-k">+</span> padding)</span>
+</div><div class="line" id="file-index-html-LC90"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>height<span class="pl-pds">"</span></span>, size <span class="pl-k">*</span> n <span class="pl-k">+</span> padding)</span>
+</div><div class="line" id="file-index-html-LC91"><span class="pl-s2">    .append(<span class="pl-s1"><span class="pl-pds">"</span>g<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC92"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>transform<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>translate(<span class="pl-pds">"</span></span> <span class="pl-k">+</span> padding <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span> <span class="pl-k">+</span> padding / <span class="pl-c1">2</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>)<span class="pl-pds">"</span></span>);</span>
+</div><div class="line" id="file-index-html-LC93"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC94"><span class="pl-s2">  svg.selectAll(<span class="pl-s1"><span class="pl-pds">"</span>.x.axis<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC95"><span class="pl-s2">      .<span class="pl-sc">data</span>(traits)</span>
+</div><div class="line" id="file-index-html-LC96"><span class="pl-s2">    .enter().append(<span class="pl-s1"><span class="pl-pds">"</span>g<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC97"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>class<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>x axis<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC98"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>transform<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>, <span class="pl-vpf">i</span>) { <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>translate(<span class="pl-pds">"</span></span> <span class="pl-k">+</span> (n <span class="pl-k">-</span> i <span class="pl-k">-</span> <span class="pl-c1">1</span>) <span class="pl-k">*</span> size <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>,0)<span class="pl-pds">"</span></span>; })</span>
+</div><div class="line" id="file-index-html-LC99"><span class="pl-s2">      .each(<span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { x.<span class="pl-sc">domain</span>(domainByTrait[d]); d3.<span class="pl-s3">select</span>(<span class="pl-v">this</span>).<span class="pl-s3">call</span>(xAxis); });</span>
+</div><div class="line" id="file-index-html-LC100"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC101"><span class="pl-s2">  svg.selectAll(<span class="pl-s1"><span class="pl-pds">"</span>.y.axis<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC102"><span class="pl-s2">      .<span class="pl-sc">data</span>(traits)</span>
+</div><div class="line" id="file-index-html-LC103"><span class="pl-s2">    .enter().append(<span class="pl-s1"><span class="pl-pds">"</span>g<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC104"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>class<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>y axis<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC105"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>transform<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>, <span class="pl-vpf">i</span>) { <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>translate(0,<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i <span class="pl-k">*</span> size <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>)<span class="pl-pds">"</span></span>; })</span>
+</div><div class="line" id="file-index-html-LC106"><span class="pl-s2">      .each(<span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { y.<span class="pl-sc">domain</span>(domainByTrait[d]); d3.<span class="pl-s3">select</span>(<span class="pl-v">this</span>).<span class="pl-s3">call</span>(yAxis); });</span>
+</div><div class="line" id="file-index-html-LC107"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC108"><span class="pl-s2">  <span class="pl-s">var</span> cell <span class="pl-k">=</span> svg.selectAll(<span class="pl-s1"><span class="pl-pds">"</span>.cell<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC109"><span class="pl-s2">      .<span class="pl-sc">data</span>(cross(traits, traits))</span>
+</div><div class="line" id="file-index-html-LC110"><span class="pl-s2">    .enter().append(<span class="pl-s1"><span class="pl-pds">"</span>g<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC111"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>class<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>cell<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC112"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>transform<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-pds">"</span>translate(<span class="pl-pds">"</span></span> <span class="pl-k">+</span> (n <span class="pl-k">-</span> d.i <span class="pl-k">-</span> <span class="pl-c1">1</span>) <span class="pl-k">*</span> size <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span> <span class="pl-k">+</span> d.j <span class="pl-k">*</span> size <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>)<span class="pl-pds">"</span></span>; })</span>
+</div><div class="line" id="file-index-html-LC113"><span class="pl-s2">      .each(plot);</span>
+</div><div class="line" id="file-index-html-LC114"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC115"><span class="pl-s2">  <span class="pl-c">// Titles for the diagonal.</span></span>
+</div><div class="line" id="file-index-html-LC116"><span class="pl-s2">  cell.filter(<span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> d.i <span class="pl-k">===</span> d.j; }).append(<span class="pl-s1"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC117"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>x<span class="pl-pds">"</span></span>, padding)</span>
+</div><div class="line" id="file-index-html-LC118"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>y<span class="pl-pds">"</span></span>, padding)</span>
+</div><div class="line" id="file-index-html-LC119"><span class="pl-s2">      .attr(<span class="pl-s1"><span class="pl-pds">"</span>dy<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>.71em<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC120"><span class="pl-s2">      .<span class="pl-sc">text</span>(<span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> d.<span class="pl-sc">x</span>; });</span>
+</div><div class="line" id="file-index-html-LC121"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC122"><span class="pl-s2">  cell.<span class="pl-s3">call</span>(brush);</span>
+</div><div class="line" id="file-index-html-LC123"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC124"><span class="pl-s2">  <span class="pl-st">function</span> <span class="pl-en">plot</span>(<span class="pl-vpf">p</span>) {</span>
+</div><div class="line" id="file-index-html-LC125"><span class="pl-s2">    <span class="pl-s">var</span> cell <span class="pl-k">=</span> d3.<span class="pl-s3">select</span>(<span class="pl-v">this</span>);</span>
+</div><div class="line" id="file-index-html-LC126"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC127"><span class="pl-s2">    x.<span class="pl-sc">domain</span>(domainByTrait[p.<span class="pl-sc">x</span>]);</span>
+</div><div class="line" id="file-index-html-LC128"><span class="pl-s2">    y.<span class="pl-sc">domain</span>(domainByTrait[p.<span class="pl-sc">y</span>]);</span>
+</div><div class="line" id="file-index-html-LC129"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC130"><span class="pl-s2">    cell.append(<span class="pl-s1"><span class="pl-pds">"</span>rect<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC131"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>class<span class="pl-pds">"</span></span>, <span class="pl-s1"><span class="pl-pds">"</span>frame<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC132"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>x<span class="pl-pds">"</span></span>, padding / <span class="pl-c1">2</span>)</span>
+</div><div class="line" id="file-index-html-LC133"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>y<span class="pl-pds">"</span></span>, padding / <span class="pl-c1">2</span>)</span>
+</div><div class="line" id="file-index-html-LC134"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>width<span class="pl-pds">"</span></span>, size <span class="pl-k">-</span> padding)</span>
+</div><div class="line" id="file-index-html-LC135"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>height<span class="pl-pds">"</span></span>, size <span class="pl-k">-</span> padding);</span>
+</div><div class="line" id="file-index-html-LC136"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC137"><span class="pl-s2">    cell.selectAll(<span class="pl-s1"><span class="pl-pds">"</span>circle<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC138"><span class="pl-s2">        .<span class="pl-sc">data</span>(data)</span>
+</div><div class="line" id="file-index-html-LC139"><span class="pl-s2">      .enter().append(<span class="pl-s1"><span class="pl-pds">"</span>circle<span class="pl-pds">"</span></span>)</span>
+</div><div class="line" id="file-index-html-LC140"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>cx<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> x(d[p.<span class="pl-sc">x</span>]); })</span>
+</div><div class="line" id="file-index-html-LC141"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>cy<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> y(d[p.<span class="pl-sc">y</span>]); })</span>
+</div><div class="line" id="file-index-html-LC142"><span class="pl-s2">        .attr(<span class="pl-s1"><span class="pl-pds">"</span>r<span class="pl-pds">"</span></span>, <span class="pl-c1">3</span>)</span>
+</div><div class="line" id="file-index-html-LC143"><span class="pl-s2">        .<span class="pl-sc">style</span>(<span class="pl-s1"><span class="pl-pds">"</span>fill<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>) { <span class="pl-k">return</span> color(d.species); });</span>
+</div><div class="line" id="file-index-html-LC144"><span class="pl-s2">  }</span>
+</div><div class="line" id="file-index-html-LC145"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC146"><span class="pl-s2">  <span class="pl-s">var</span> brushCell;</span>
+</div><div class="line" id="file-index-html-LC147"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC148"><span class="pl-s2">  <span class="pl-c">// Clear the previously-active brush, if any.</span></span>
+</div><div class="line" id="file-index-html-LC149"><span class="pl-s2">  <span class="pl-st">function</span> <span class="pl-en">brushstart</span>(<span class="pl-vpf">p</span>) {</span>
+</div><div class="line" id="file-index-html-LC150"><span class="pl-s2">    <span class="pl-k">if</span> (brushCell <span class="pl-k">!==</span> <span class="pl-v">this</span>) {</span>
+</div><div class="line" id="file-index-html-LC151"><span class="pl-s2">      d3.<span class="pl-s3">select</span>(brushCell).<span class="pl-s3">call</span>(brush.<span class="pl-s3">clear</span>());</span>
+</div><div class="line" id="file-index-html-LC152"><span class="pl-s2">      x.<span class="pl-sc">domain</span>(domainByTrait[p.<span class="pl-sc">x</span>]);</span>
+</div><div class="line" id="file-index-html-LC153"><span class="pl-s2">      y.<span class="pl-sc">domain</span>(domainByTrait[p.<span class="pl-sc">y</span>]);</span>
+</div><div class="line" id="file-index-html-LC154"><span class="pl-s2">      brushCell <span class="pl-k">=</span> <span class="pl-v">this</span>;</span>
+</div><div class="line" id="file-index-html-LC155"><span class="pl-s2">    }</span>
+</div><div class="line" id="file-index-html-LC156"><span class="pl-s2">  }</span>
+</div><div class="line" id="file-index-html-LC157"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC158"><span class="pl-s2">  <span class="pl-c">// Highlight the selected circles.</span></span>
+</div><div class="line" id="file-index-html-LC159"><span class="pl-s2">  <span class="pl-st">function</span> <span class="pl-en">brushmove</span>(<span class="pl-vpf">p</span>) {</span>
+</div><div class="line" id="file-index-html-LC160"><span class="pl-s2">    <span class="pl-s">var</span> e <span class="pl-k">=</span> brush.extent();</span>
+</div><div class="line" id="file-index-html-LC161"><span class="pl-s2">    svg.selectAll(<span class="pl-s1"><span class="pl-pds">"</span>circle<span class="pl-pds">"</span></span>).classed(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>, <span class="pl-st">function</span>(<span class="pl-vpf">d</span>) {</span>
+</div><div class="line" id="file-index-html-LC162"><span class="pl-s2">      <span class="pl-k">return</span> e[<span class="pl-c1">0</span>][<span class="pl-c1">0</span>] <span class="pl-k">&gt;</span> d[p.<span class="pl-sc">x</span>] <span class="pl-k">||</span> d[p.<span class="pl-sc">x</span>] <span class="pl-k">&gt;</span> e[<span class="pl-c1">1</span>][<span class="pl-c1">0</span>]</span>
+</div><div class="line" id="file-index-html-LC163"><span class="pl-s2">          <span class="pl-k">||</span> e[<span class="pl-c1">0</span>][<span class="pl-c1">1</span>] <span class="pl-k">&gt;</span> d[p.<span class="pl-sc">y</span>] <span class="pl-k">||</span> d[p.<span class="pl-sc">y</span>] <span class="pl-k">&gt;</span> e[<span class="pl-c1">1</span>][<span class="pl-c1">1</span>];</span>
+</div><div class="line" id="file-index-html-LC164"><span class="pl-s2">    });</span>
+</div><div class="line" id="file-index-html-LC165"><span class="pl-s2">  }</span>
+</div><div class="line" id="file-index-html-LC166"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC167"><span class="pl-s2">  <span class="pl-c">// If the brush is empty, select all circles.</span></span>
+</div><div class="line" id="file-index-html-LC168"><span class="pl-s2">  <span class="pl-st">function</span> <span class="pl-en">brushend</span>() {</span>
+</div><div class="line" id="file-index-html-LC169"><span class="pl-s2">    <span class="pl-k">if</span> (brush.empty()) svg.selectAll(<span class="pl-s1"><span class="pl-pds">"</span>.hidden<span class="pl-pds">"</span></span>).classed(<span class="pl-s1"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span>, <span class="pl-c1">false</span>);</span>
+</div><div class="line" id="file-index-html-LC170"><span class="pl-s2">  }</span>
+</div><div class="line" id="file-index-html-LC171"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC172"><span class="pl-s2">  <span class="pl-st">function</span> <span class="pl-en">cross</span>(<span class="pl-vpf">a</span>, <span class="pl-vpf">b</span>) {</span>
+</div><div class="line" id="file-index-html-LC173"><span class="pl-s2">    <span class="pl-s">var</span> c <span class="pl-k">=</span> [], n <span class="pl-k">=</span> a.<span class="pl-sc">length</span>, m <span class="pl-k">=</span> b.<span class="pl-sc">length</span>, i, j;</span>
+</div><div class="line" id="file-index-html-LC174"><span class="pl-s2">    <span class="pl-k">for</span> (i <span class="pl-k">=</span> <span class="pl-k">-</span><span class="pl-c1">1</span>; <span class="pl-k">++</span>i <span class="pl-k">&lt;</span> n;) <span class="pl-k">for</span> (j <span class="pl-k">=</span> <span class="pl-k">-</span><span class="pl-c1">1</span>; <span class="pl-k">++</span>j <span class="pl-k">&lt;</span> m;) c.<span class="pl-s3">push</span>({x<span class="pl-k">:</span> a[i], i<span class="pl-k">:</span> i, y<span class="pl-k">:</span> b[j], j<span class="pl-k">:</span> j});</span>
+</div><div class="line" id="file-index-html-LC175"><span class="pl-s2">    <span class="pl-k">return</span> c;</span>
+</div><div class="line" id="file-index-html-LC176"><span class="pl-s2">  }</span>
+</div><div class="line" id="file-index-html-LC177"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC178"><span class="pl-s2">  d3.<span class="pl-s3">select</span>(self.<span class="pl-sc">frameElement</span>).<span class="pl-sc">style</span>(<span class="pl-s1"><span class="pl-pds">"</span>height<span class="pl-pds">"</span></span>, size <span class="pl-k">*</span> n <span class="pl-k">+</span> padding <span class="pl-k">+</span> <span class="pl-c1">20</span> <span class="pl-k">+</span> <span class="pl-s1"><span class="pl-pds">"</span>px<span class="pl-pds">"</span></span>);</span>
+</div><div class="line" id="file-index-html-LC179"><span class="pl-s2">});</span>
+</div><div class="line" id="file-index-html-LC180"><span class="pl-s2"></span>
+</div><div class="line" id="file-index-html-LC181"><span class="pl-s2">&lt;/<span class="pl-ent">script</span>&gt;</span>
+</div></pre>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+
+  </div>
+</div>
+
+            <div id="file-thumbnail-png" class="file ">
+    <a href="./Scatterplot Matrix Brushing2_files/Scatterplot Matrix Brushing2.html" class="link-overlay">
+    <span class="link">View <strong>README.md</strong> <span class="octicon octicon-arrow-right"></span></span>
+  </a>
+  <div class="meta clearfix">
+    <div class="info file-name">
+      <span class="icon">
+        <b class="octicon octicon-file-media"></b>
+      </span>
+      <a aria-label="Permalink" href="https://gist.github.com/mbostock/4063663#file-thumbnail-png" class="tooltipped tooltipped-s permalink"><strong class="file-name js-selectable-text">thumbnail.png</strong></a>
+    </div>
+    <div class="actions">
+      <div class="button-group">
+        <a aria-label="View Raw" href="./Scatterplot Matrix Brushing2_files/thumbnail.png" data-skip-pjax="" class="minibutton raw-url js-view-raw">Raw</a>
+      </div>
+    </div>
+  </div>
+  <div class="suppressed">
+    <a class="js-show-suppressed-file">File suppressed. Click to show.</a>
+  </div>
+  <div class="blob-wrapper data type-text js-blob-data">
+    
+      <div class="image js-image">
+        <span class="border-wrap"><img alt="Thumbnail" src="./Scatterplot Matrix Brushing2_files/thumbnail.png"></span>
+      </div>
+
+
+
+
+  </div>
+</div>
+
+
+        <div class="discussion-timeline js-quote-selection-container">
+
+          <div class="js-discussion">
+            
+<div class="timeline-comment-wrapper js-comment-container">
+  <a href="https://gist.github.com/fdeheeger"><img class="timeline-comment-avatar" src="./Scatterplot Matrix Brushing2_files/473756" width="48" height="48"></a>
+  <div class="timeline-comment ">
+    <div id="comment-941268" class="comment js-comment js-task-list-container" data-body-version="42ac96c79635ae23d56c81b683aaefc8">
+      <div class="timeline-comment-header">
+
+
+
+        <div class="timeline-comment-header-text">
+          <strong>
+            <a class="author" href="https://gist.github.com/fdeheeger">fdeheeger</a>
+          </strong>
+
+          commented
+
+            <a href="https://gist.github.com/mbostock/4063663#comment-941268" class="timestamp"><time datetime="2013-10-31T14:25:34Z" is="relative-time" title="31 Oct 2013 11:25 ADT">on 31 Oct 2013</time></a>
+        </div>
+      </div>
+
+    <div class="comment-content">
+
+      <div class="edit-comment-hide">
+        <div class="comment-body markdown-body  js-comment-body">
+            <p>duplicate in SO: <a href="http://stackoverflow.com/questions/19708380/d3-js-scatter-matrix-with-brushing-scale-error" rel="noreferrer">http://stackoverflow.com/questions/19708380/d3-js-scatter-matrix-with-brushing-scale-error</a></p>
+
+<p>I try to reuse this example of 'scatter matrix with brushing'. The code seems to be pretty reusable but there is some scale problems... <br>
+Scales seems to be somehow hard coded or so: i change the csv by adding 10 to 75% of the first column values, and the x / y scales are not directly updated. To visualize the problem, see the fork of the gist: <a href="http://bl.ocks.org/fdeheeger/7249196" rel="noreferrer">http://bl.ocks.org/fdeheeger/7249196</a></p>
+
+<p>I cannot figure out where/how the scale is computed or updated in the javascript code.</p>
+
+<p>I do not want to take your time, just point you this problem in case you are not aware of.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  </div>
+
+<div class="timeline-comment-wrapper js-comment-container">
+  <a href="https://gist.github.com/fdeheeger"><img class="timeline-comment-avatar" src="./Scatterplot Matrix Brushing2_files/473756" width="48" height="48"></a>
+  <div class="timeline-comment ">
+    <div id="comment-941294" class="comment js-comment js-task-list-container" data-body-version="5fc6d603d1d62d0ba32e12d362e174b0">
+      <div class="timeline-comment-header">
+
+
+
+        <div class="timeline-comment-header-text">
+          <strong>
+            <a class="author" href="https://gist.github.com/fdeheeger">fdeheeger</a>
+          </strong>
+
+          commented
+
+            <a href="https://gist.github.com/mbostock/4063663#comment-941294" class="timestamp"><time datetime="2013-10-31T15:06:11Z" is="relative-time" title="31 Oct 2013 12:06 ADT">on 31 Oct 2013</time></a>
+        </div>
+      </div>
+
+    <div class="comment-content">
+
+      <div class="edit-comment-hide">
+        <div class="comment-body markdown-body  js-comment-body">
+            <p>Answer in SO... thanks to Lars Kotthoff</p>
+
+<p>L75 have to be changed into:<br>
+domainByTrait[trait] = d3.extent(data, function(d) { return +d[trait]; });</p>
+
+<p>Regards.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  </div>
+
+          </div>
+
+          <div class="discussion-timeline-actions">
+              <div class="signed-out-comment">
+	<a class="button primary" href="https://github.com/signup?return_to=gist" rel="nofollow">Sign up for free</a>
+	<strong>to join this conversation on GitHub</strong>.
+	Already have an account?
+  <a href="https://gist.github.com/login?return_to=%2Fmbostock%2F4063663" rel="nofollow">Sign in to comment</a>
+</div>
+
+
+          </div>
+        </div><!-- /.discussion-timeline -->
+      </div><!-- /.gist-content -->
+    </div>
+  </div>
+</div><!-- /.container -->
+
+  <div class="context-overlay"></div>
+</div>
+
+    </div>
+    <div class="slow-loading-overlay"></div>
+  </div>
+
+  <div id="ajax-error-message" class="flash flash-error">
+    <div class="container">
+      <span class="octicon octicon-alert"></span>
+      Something went wrong with that request. Please try again.
+      <a href="https://gist.github.com/mbostock/4063663#" class="octicon octicon-x ajax-error-dismiss"></a>
+    </div>
+  </div>
+
+
+  <footer>
+    <div class="container">
+  <div class="site-footer">
+    <ul class="site-footer-links right">
+      <li><a href="https://status.github.com/">Status</a></li>
+      <li><a href="http://developer.github.com/">API</a></li>
+      <li><a href="https://github.com/blog">Blog</a></li>
+      <li><a href="https://github.com/about">About</a></li>
+
+    </ul>
+
+    <a href="https://gist.github.com/">
+      <span class="mega-octicon octicon-mark-github" title="GitHub "></span>
+    </a>
+
+    <ul class="site-footer-links">
+      <li>© 2015 <span title="0.02860s from github-fe102-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy">Privacy</a></li>
+        <li><a href="https://github.com/security">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+    </ul>
+  </div><!-- /.site-footer -->
+</div><!-- /.container -->
+
+  </footer>
+
+  <div class="fullscreen-overlay js-fullscreen-overlay" id="fullscreen_overlay">
+  <div class="fullscreen-container js-fullscreen-container">
+    <div class="textarea-wrap">
+      <textarea name="fullscreen-contents" id="fullscreen-contents" class="fullscreen-contents js-fullscreen-contents" placeholder="" data-suggester="fullscreen_suggester"></textarea>
+        <div class="suggester-container">
+            <div class="suggester fullscreen-suggester js-navigation-container" id="fullscreen_suggester" data-url="/mbostock/4063663/suggestions">
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="fullscreen-sidebar">
+    <a href="https://gist.github.com/mbostock/4063663#" class="exit-fullscreen js-exit-fullscreen tooltipped tooltipped-w" aria-label="Exit Zen Mode">
+      <span class="mega-octicon octicon-screen-normal"></span>
+    </a>
+    <a href="https://gist.github.com/mbostock/4063663#" class="theme-switcher js-theme-switcher tooltipped tooltipped-w" aria-label="Switch themes">
+      <span class="octicon octicon-color-mode"></span>
+    </a>
+  </div>
+</div>
+
+
+
+
+<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 1px; height: 1px; z-index: 999999999;"><object id="global-zeroclipboard-flash-bridge" name="global-zeroclipboard-flash-bridge" width="100%" height="100%" type="application/x-shockwave-flash" data="https://gist-assets.github.com/assets/zeroclipboard/dist/ZeroClipboard-aeb54c213f0d09883fed5a0947132da9.swf"><param name="allowScriptAccess" value="always"><param name="allowNetworking" value="all"><param name="menu" value="false"><param name="wmode" value="transparent"><param name="flashvars" value="trustedOrigins=gist.github.com%2C%2F%2Fgist.github.com%2Chttps%3A%2F%2Fgist.github.com&amp;swfObjectId=global-zeroclipboard-flash-bridge"></object></div></body><object id="6b9ab95a-1a2a-93a8-6a38-4a9cdab68ea1" width="0" height="0" type="application/gas-events-bb"></object></html>

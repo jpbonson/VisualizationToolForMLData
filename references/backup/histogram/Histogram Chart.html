@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://bl.ocks.org/mbostock/1933560 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8">
+<title>Histogram Chart</title>
+<link rel="icon" href="http://bl.ocks.org/favicon.png">
+<style>
+
+@import url("/style.css?20120730");
+
+header,
+footer {
+  color: #555;
+}
+
+a.gist {
+  color: #000;
+}
+
+</style>
+
+<style type="text/css"></style></head><body><header>
+  <a href="http://bl.ocks.org/mbostock">mbostock</a>’s block
+  <a class="gist" title="View gist #1933560 on GitHub" href="https://gist.github.com/mbostock/1933560">#1933560</a>
+  <span class="date">February 28, 2012</span>
+</header>
+
+<h1>Histogram Chart</h1>
+
+
+<iframe src="./Histogram Chart_files/saved_resource.html" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<p></p><aside><a style="position:relative;top:6px;" href="http://bl.ocks.org/mbostock/raw/1933560/" target="_blank">Open in a new window.</a></aside>
+
+
+<div class="gist-readme"><p>This example is out-of-date; I prefer <a href="http://bl.ocks.org/3048450">this newer histogram example</a> that places the tick marks between bars. However, the implementation still stands as an example of the <a href="http://bost.ocks.org/mike/chart/">reusable chart module pattern</a>.</p></div>
+
+<div class="gist-sources"><div class="gist-source"><h2>index.html<a name="index.html" href="http://bl.ocks.org/mbostock/1933560#index.html">#</a></h2><pre><code class="html xml"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+
+<span class="class">.bars</span> <span class="tag">rect</span> <span class="rules">{
+  <span class="rule"><span class="attribute">fill</span>:<span class="value"> steelblue</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="class">.axis</span> <span class="tag">text</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font</span>:<span class="value"> <span class="number">10</span>px sans-serif</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="class">.axis</span> <span class="tag">path</span>, <span class="class">.axis</span> <span class="tag">line</span> <span class="rules">{
+  <span class="rule"><span class="attribute">fill</span>:<span class="value"> none</span>;</span>
+  <span class="rule"><span class="attribute">stroke</span>:<span class="value"> <span class="number">#000</span></span>;</span>
+  <span class="rule"><span class="attribute">shape-rendering</span>:<span class="value"> crispEdges</span>;</span>
+<span class="rule">}</span></span>
+
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://mbostock.github.com/d3/d3.v2.js?2.8.0"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"histogram-chart.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+
+d3.select(<span class="string">"body"</span>)
+    .datum(irwinHallDistribution(<span class="number">10000</span>, <span class="number">10</span>))
+  .call(histogramChart()
+    .bins(d3.scale.linear().ticks(<span class="number">20</span>))
+    .tickFormat(d3.format(<span class="string">".02f"</span>)));
+
+<span class="function"><span class="keyword">function</span> <span class="title">irwinHallDistribution</span><span class="params">(n, m)</span> {</span>
+  <span class="keyword">var</span> distribution = [];
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) {
+    <span class="keyword">for</span> (<span class="keyword">var</span> s = <span class="number">0</span>, j = <span class="number">0</span>; j &lt; m; j++) {
+      s += Math.random();
+    }
+    distribution.push(s / m);
+  }
+  <span class="keyword">return</span> distribution;
+}
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</code></pre></div><div class="gist-source"><h2>histogram-chart.js<a name="histogram-chart.js" href="http://bl.ocks.org/mbostock/1933560#histogram-chart.js">#</a></h2><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">histogramChart</span><span class="params">()</span> {</span>
+  <span class="keyword">var</span> margin = {top: <span class="number">0</span>, right: <span class="number">0</span>, bottom: <span class="number">20</span>, left: <span class="number">0</span>},
+      width = <span class="number">960</span>,
+      height = <span class="number">500</span>;
+
+  <span class="keyword">var</span> histogram = d3.layout.histogram(),
+      x = d3.scale.ordinal(),
+      y = d3.scale.linear(),
+      xAxis = d3.svg.axis().scale(x).orient(<span class="string">"bottom"</span>).tickSize(<span class="number">6</span>, <span class="number">0</span>);
+
+  <span class="function"><span class="keyword">function</span> <span class="title">chart</span><span class="params">(selection)</span> {</span>
+    selection.each(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> {</span>
+
+      <span class="comment">// Compute the histogram.</span>
+      data = histogram(data);
+
+      <span class="comment">// Update the x-scale.</span>
+      x   .domain(data.map(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.x; }))
+          .rangeRoundBands([<span class="number">0</span>, width - margin.left - margin.right], .<span class="number">1</span>);
+
+      <span class="comment">// Update the y-scale.</span>
+      y   .domain([<span class="number">0</span>, d3.max(data, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.y; })])
+          .range([height - margin.top - margin.bottom, <span class="number">0</span>]);
+
+      <span class="comment">// Select the svg element, if it exists.</span>
+      <span class="keyword">var</span> svg = d3.select(<span class="keyword">this</span>).selectAll(<span class="string">"svg"</span>).data([data]);
+
+      <span class="comment">// Otherwise, create the skeletal chart.</span>
+      <span class="keyword">var</span> gEnter = svg.enter().append(<span class="string">"svg"</span>).append(<span class="string">"g"</span>);
+      gEnter.append(<span class="string">"g"</span>).attr(<span class="string">"class"</span>, <span class="string">"bars"</span>);
+      gEnter.append(<span class="string">"g"</span>).attr(<span class="string">"class"</span>, <span class="string">"x axis"</span>);
+
+      <span class="comment">// Update the outer dimensions.</span>
+      svg .attr(<span class="string">"width"</span>, width)
+          .attr(<span class="string">"height"</span>, height);
+
+      <span class="comment">// Update the inner dimensions.</span>
+      <span class="keyword">var</span> g = svg.select(<span class="string">"g"</span>)
+          .attr(<span class="string">"transform"</span>, <span class="string">"translate("</span> + margin.left + <span class="string">","</span> + margin.top + <span class="string">")"</span>);
+
+      <span class="comment">// Update the bars.</span>
+      <span class="keyword">var</span> bar = svg.select(<span class="string">".bars"</span>).selectAll(<span class="string">".bar"</span>).data(data);
+      bar.enter().append(<span class="string">"rect"</span>);
+      bar.exit().remove();
+      bar .attr(<span class="string">"width"</span>, x.rangeBand())
+          .attr(<span class="string">"x"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> x(d.x); })
+          .attr(<span class="string">"y"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> y(d.y); })
+          .attr(<span class="string">"height"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> y.range()[<span class="number">0</span>] - y(d.y); })
+          .order();
+
+      <span class="comment">// Update the x-axis.</span>
+      g.select(<span class="string">".x.axis"</span>)
+          .attr(<span class="string">"transform"</span>, <span class="string">"translate(0,"</span> + y.range()[<span class="number">0</span>] + <span class="string">")"</span>)
+          .call(xAxis);
+    });
+  }
+
+  chart.margin = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> margin;
+    margin = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.width = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> width;
+    width = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  chart.height = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> height;
+    height = _;
+    <span class="keyword">return</span> chart;
+  };
+
+  <span class="comment">// Expose the histogram's value, range and bins method.</span>
+  d3.rebind(chart, histogram, <span class="string">"value"</span>, <span class="string">"range"</span>, <span class="string">"bins"</span>);
+
+  <span class="comment">// Expose the x-axis' tickFormat method.</span>
+  d3.rebind(chart, xAxis, <span class="string">"tickFormat"</span>);
+
+  <span class="keyword">return</span> chart;
+}
+</code></pre></div></div>
+
+<script src="./Histogram Chart_files/d3.v3.min.js"></script>
+<script src="./Histogram Chart_files/highlight.min.js"></script>
+<script>
+
+var gist = {"history":[{"version":"64916d309f629d21b58b11eeb1167f308095cfc1"}],"files":{"README.md":{"language":"Markdown","type":"text/plain","filename":"README.md","size":266,"sha":"f13d5c8fc9aa62864a492c501c0c72d1b862f499"},"histogram-chart.js":{"language":"JavaScript","type":"application/javascript","filename":"histogram-chart.js","size":2419,"sha":"33b27ff5a01ae7768ae43bec480b7b308115c0dc"},"index.html":{"language":"HTML","type":"text/html","filename":"index.html","size":755,"sha":"bb301bf34b9db56b69a53f6fa0a5a71f64ade4b5"},"thumbnail.png":{"language":null,"type":"image/png","filename":"thumbnail.png","size":3360,"sha":"0cdad1086248c9b4588d47d62eef101183ba7a62"}},"created_at":"2012-02-28T16:42:38.000Z","updated_at":"2012-10-12T03:51:43.000Z","description":"Histogram Chart","owner":{"login":"mbostock"},"id":"1933560"};
+
+var files = d3.values(gist.files)
+    .sort(function(a, b) { return (b.filename === "index.html") - (a.filename === "index.html") || a.filename.localeCompare(b.filename); });
+
+var readme = d3.selectAll(".gist-readme")
+    .data(files.filter(function(d) { return /^readme\b/i.test(d.filename) && d.language === "Markdown"; }))
+    .each(function(d) {
+      var readme = d3.select(this);
+      d3.text("/mbostock/raw/1933560/64916d309f629d21b58b11eeb1167f308095cfc1/" + d.filename, function(error, content) {
+        readme.html(new Showdown.converter().makeHtml(content));
+        readme.selectAll("code").each(function() { hljs.highlightBlock(this); });
+      });
+    });
+
+var source = d3.select(".gist-sources").selectAll(".gist-source")
+    .data(files.filter(function(d) { return !/^readme\b/i.test(d.filename) && d.size < 50000 && text(d.type); }))
+  .enter().append("div")
+    .attr("class", "gist-source");
+
+source.append("h2")
+    .text(function(d) { return d.filename; })
+  .append("a")
+    .attr("name", function(d) { return d.filename; })
+    .attr("href", function(d) { return "#" + d.filename; })
+    .text("#");
+
+source.append("pre").append("code")
+    .attr("class", function(d) { return d.language && (d.language === "JSON" ? "javascript" : d.language.toLowerCase()); })
+    .each(function(d) {
+      var code = d3.select(this);
+      d3.text("/mbostock/raw/1933560/64916d309f629d21b58b11eeb1167f308095cfc1/" + (d.filename === "index.html" ? "" : d.filename), function(error, content) {
+        code.text(content);
+        hljs.highlightBlock(code.node());
+      });
+    });
+
+function text(type) {
+  return /(^text\/)|(^application\/(javascript|json)$)|(^image\/svg$)|(\+xml$)/.test(type);
+}
+
+</script>
+
+<footer>
+  <a href="http://bl.ocks.org/mbostock">mbostock</a>’s block
+  <a class="gist" title="View gist #1933560 on GitHub" href="https://gist.github.com/mbostock/1933560">#1933560</a>
+  <span class="date">February 28, 2012</span>
+</footer>
+
+<script>
+
+GoogleAnalyticsObject = "ga", ga = function() { ga.q.push(arguments); }, ga.q = [], ga.l = +new Date;
+ga("create", "UA-48272912-1", "ocks.org");
+ga("send", "pageview");
+
+</script>
+<script async="" src="./Histogram Chart_files/analytics.js"></script>
+</body><object id="7be919cb-a9c9-9fa9-d849-fbbf59a9b59d" width="0" height="0" type="application/gas-events-bb"></object></html>

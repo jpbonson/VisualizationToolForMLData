@@ -1,12 +1,28 @@
-function chart_scatter_matrix(obj) { 
+function chart_scatter_matrix() { 
+    var obj = matrix_id
     var width = 650
     var padding = 19.5
     var dot_size = 3
 
+    var use_zoom = false
+    var use_partial_row_zoom = false
+    var use_partial_column_zoom = false
+    if(selected_row !== -1 && selected_column !== -1) {
+        use_zoom = true
+    } else if(selected_row !== -1) {
+        use_partial_row_zoom = true
+    } else if(selected_column !== -1) {
+        use_partial_column_zoom = true
+    }
+
     d3.csv(data_file, function(error, data) {
         var domain_per_attribute = {}
         var attributes = d3.keys(data[0]).filter(function(d, i) { return d !== "labels" && columns_mask[i]; })
+
         var n = attributes.length;
+        if(use_zoom) {
+            n = 1
+        }
         var classes = data.map(function(d) { return d.labels; }).filter( unique );
 
         attributes.forEach(function(trait) {
@@ -14,6 +30,15 @@ function chart_scatter_matrix(obj) {
         });
 
         chart_size = width/n
+
+        var data_axis_x = attributes
+        var data_axis_y = attributes
+        var ticks = 5
+        if(use_zoom) {
+            data_axis_x = [attributes[selected_column]]
+            data_axis_y = [attributes[selected_row]]
+            ticks = 10
+        }
 
         var x = d3.scale.linear()
             .range([padding / 2, chart_size - padding / 2]);
@@ -24,31 +49,31 @@ function chart_scatter_matrix(obj) {
         var xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
-            .ticks(5);
+            .ticks(ticks);
 
         var yAxis = d3.svg.axis()
             .scale(y)
             .orient("left")
-            .ticks(5);
+            .ticks(ticks);
 
-        xAxis.tickSize(chart_size * n);
-        yAxis.tickSize(-chart_size * n);
+        xAxis.tickSize(width);
+        yAxis.tickSize(-width);
 
         var svg = d3.select(obj).append("svg")
-                .attr("width", chart_size * n + padding)
-                .attr("height", chart_size * n + padding)
+                .attr("width", width + padding)
+                .attr("height", width + padding)
             .append("g")
                 .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
 
         svg.selectAll(".x.axis")
-                .data(attributes)
+                .data(data_axis_x)
             .enter().append("g")
                 .attr("class", "x axis")
-                .attr("transform", function(d, i) { return "translate(" + (n - i - 1) * chart_size + ",0)"; })
+                .attr("transform", function(d, i) { return "translate(" + i * chart_size + ",0)"; })
                 .each(function(d) { x.domain(domain_per_attribute[d]); d3.select(this).call(xAxis); });
 
         svg.selectAll(".y.axis")
-                .data(attributes)
+                .data(data_axis_y)
             .enter().append("g")
                 .attr("class", "y axis")
                 .attr("transform", function(d, i) { return "translate(0," + i * chart_size + ")"; })
@@ -58,7 +83,13 @@ function chart_scatter_matrix(obj) {
                 .data(attributes_matrix(attributes, attributes))
             .enter().append("g")
                 .attr("class", "cell")
-                .attr("transform", function(d) { return "translate(" + d.column * chart_size + "," + d.row * chart_size + ")"; })
+                .attr("transform", function(d) {
+                    if(use_zoom) {
+                        return "translate(0,0)";
+                    } else {
+                        return "translate(" + d.column * chart_size + "," + d.row * chart_size + ")";
+                    }
+                })
                 .each(plot);
 
         var brush = d3.svg.brush()
@@ -186,7 +217,7 @@ function chart_scatter_matrix(obj) {
                 .enter()
 
                 bar.append("rect")
-                    .style("fill", colors)
+                    .style("fill", "#C80000")
                     .attr("x", function(d) { return x2(d.x) + 10 ; })
                     .attr("width", x2.rangeBand())
                     .attr("y", function(d) { return y2(d.y) + padding/2; })
@@ -195,13 +226,13 @@ function chart_scatter_matrix(obj) {
                         tooltip.style("display", null); 
                         d3.select(this)
                             .transition().duration(100)
-                                .style("fill", "#154b70")
+                                .style("fill", "#500000")
                     })
                     .on("mouseout", function() { 
                         tooltip.style("display", "none"); 
                         d3.select(this)
                             .transition().duration(100)
-                                .style("fill", colors)
+                                .style("fill", "#C80000")
                     })
                     .on("mousemove", function(data) {
                         var xPosition = chart.column*chart_size + d3.mouse(this)[0] - tooltip_width/2;
@@ -233,7 +264,21 @@ function chart_scatter_matrix(obj) {
             var crossed_attributes = []
             for (var i = 0; i < attribute1.length; i++) {
                 for (var j = 0; j < attribute2.length; j++) {
-                    crossed_attributes.push({attributes_x: attribute1[i], column: i, attributes_y: attribute2[j], row: j});
+                    if(use_zoom) {
+                        if(selected_row === j && selected_column === i) {
+                            crossed_attributes.push({attributes_x: attribute1[i], column: i, attributes_y: attribute2[j], row: j});
+                        }
+                    } else if(use_partial_row_zoom) {
+                        if(selected_row === j) {
+                            crossed_attributes.push({attributes_x: attribute1[i], column: i, attributes_y: attribute2[j], row: j});
+                        }
+                    } else if(use_partial_column_zoom) {
+                        if(selected_column === i) {
+                            crossed_attributes.push({attributes_x: attribute1[i], column: i, attributes_y: attribute2[j], row: j});
+                        }
+                    } else {
+                        crossed_attributes.push({attributes_x: attribute1[i], column: i, attributes_y: attribute2[j], row: j});
+                    }
                 }
             }
             return crossed_attributes;

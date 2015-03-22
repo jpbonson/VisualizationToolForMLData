@@ -7,7 +7,8 @@
         <script src="static/js/utils.js"></script>
         <script src="static/js/scatter_matrix.js"></script>
         <script src="static/js/legends.js"></script>
-        <script src="static/js/attributes.js"></script>
+        <script src="static/js/filter.js"></script>
+        <script src="static/js/zoom.js"></script>
         <link rel="stylesheet" type="text/css" href="static/css/style.css">
         <link rel="stylesheet" type="text/css" href="static/css/vendor/button_style.css">
     </head>
@@ -30,15 +31,29 @@
                 <div id="chart-attributes" style="overflow: auto;height: 160px"></div>
             </fieldset>
             </div>
+            <div>
+                <fieldset>
+                <legend><h3>Zoom:</h3></legend>
+                    <div>
+                        <div style="float: left; width: 60px;">Row:</div>
+                        <select id="zoom_row" onchange="zoom_row()"></select>
+                    </div>
+                    <div>
+                        <div style="float: left; width: 60px;">Column:</div>
+                        <select id="zoom_column" onchange="zoom_column()"></select>
+                    </div>
+                </fieldset>
+            </div>
             <div style="clear: left;">
-            <fieldset>
-            <legend><h3>Filter Algorithms:</h3></legend>
-                <input type="checkbox" value="checkbox-filterA">Filter A<br>
-                <input type="checkbox" value="checkbox-filterA">Filter B<br>
-                <input type="checkbox" value="checkbox-filterA">Filter C<br>
-            </fieldset>
-            <a href="#" class="button black" style="margin-top: 20px;">Upload dataset</a>
-            
+                <fieldset>
+                <legend><h3>Filter Algorithms:</h3></legend>
+                    <input type="checkbox" value="checkbox-filterA">Filter A<br>
+                    <input type="checkbox" value="checkbox-filterA">Filter B<br>
+                    <input type="checkbox" value="checkbox-filterA">Filter C<br>
+                </fieldset>
+
+                <a href="#" class="button black" style="margin-top: 20px;">Upload dataset</a>
+
             </div>
         </div>
         <div id="content">
@@ -50,11 +65,16 @@
         var colors = d3.scale.category10();
         var data_file = "{{ data_file }}"
         var matrix_id = "#scattermatrix"
+        var combobox_rows_id = "#zoom_row"
+        var combobox_columns_id = "#zoom_column"
         var columns_mask = initialize_columns_mask()
+        var selected_row = -1
+        var selected_column = -1
 
         // Initialize Dynamic Content
-        chart_scatter_matrix(matrix_id);
+        initialize_zoom_comboboxes()
+        chart_scatter_matrix();
         chart_legends("#chart-legends");
-        chart_attributes("#chart-attributes", matrix_id);
+        chart_attributes("#chart-attributes");
     </script>
 </html>
