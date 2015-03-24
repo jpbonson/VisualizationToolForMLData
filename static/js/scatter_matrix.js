@@ -4,6 +4,7 @@ function chart_scatter_matrix() {
     var padding = 19.5
     var dot_size = 3
 
+    // define if a type of zoom is being used
     var use_zoom = false
     var use_partial_row_zoom = false
     var use_partial_column_zoom = false
@@ -15,6 +16,7 @@ function chart_scatter_matrix() {
         use_partial_column_zoom = true
     }
 
+    // load CSV data and process it
     d3.csv(data_file, function(error, data) {
         var domain_per_attribute = {}
         var attributes = d3.keys(data[0]).filter(function(d, i) { return d !== "labels" && columns_mask[i]; })
@@ -31,6 +33,7 @@ function chart_scatter_matrix() {
 
         chart_size = width/n
 
+        // if zoom is being used, the axis will be displayed differently
         var data_axis_x = attributes
         var data_axis_y = attributes
         var ticks = 5
@@ -40,6 +43,7 @@ function chart_scatter_matrix() {
             ticks = 10
         }
 
+        // axis
         var x = d3.scale.linear()
             .range([padding / 2, chart_size - padding / 2]);
 
@@ -59,6 +63,7 @@ function chart_scatter_matrix() {
         xAxis.tickSize(width);
         yAxis.tickSize(-width);
 
+        // main chart
         var svg = d3.select(obj).append("svg")
                 .attr("width", width + padding)
                 .attr("height", width + padding)

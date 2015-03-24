@@ -9,6 +9,7 @@
         <script src="static/js/legends.js"></script>
         <script src="static/js/filter.js"></script>
         <script src="static/js/zoom.js"></script>
+        <script src="static/js/auto-filter.js"></script>
         <link rel="stylesheet" type="text/css" href="static/css/style.css">
         <link rel="stylesheet" type="text/css" href="static/css/vendor/button_style.css">
     </head>
@@ -47,13 +48,16 @@
             <div style="clear: left;">
                 <fieldset>
                 <legend><h3>Filter Algorithms:</h3></legend>
-                    <input type="checkbox" value="checkbox-filterA">Filter A<br>
-                    <input type="checkbox" value="checkbox-filterA">Filter B<br>
-                    <input type="checkbox" value="checkbox-filterA">Filter C<br>
+                    <form>
+                        <input type="radio" name="auto-filter" id="filter1" value="1" checked>Filter A
+                        <br>
+                        <input type="radio" name="auto-filter" id="filter2" value="2">Filter B
+                        <br>
+                        <a href="#" id="automatic_filtering" class="button black" style="margin-top: 5px;margin-bottom: 5px;">Automatic Filter</a>
+                    </form> 
                 </fieldset>
 
                 <a href="#" class="button black" style="margin-top: 20px;">Upload dataset</a>
-
             </div>
         </div>
         <div id="content">
@@ -67,6 +71,7 @@
         var matrix_id = "#scattermatrix"
         var combobox_rows_id = "#zoom_row"
         var combobox_columns_id = "#zoom_column"
+        var chart_attributes_id = "#chart-attributes"
         var columns_mask = initialize_columns_mask()
         var selected_row = -1
         var selected_column = -1
@@ -75,6 +80,6 @@
         initialize_zoom_comboboxes()
         chart_scatter_matrix();
         chart_legends("#chart-legends");
-        chart_attributes("#chart-attributes");
+        chart_attributes();
     </script>
 </html>

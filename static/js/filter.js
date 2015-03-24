@@ -11,11 +11,17 @@ function initialize_columns_mask() {
 }
 
 // Add the attributes to the checkbox list
-function chart_attributes(obj) {
+function chart_attributes() {
+    var obj = chart_attributes_id
+    $(obj).empty();
     d3.csv(data_file, function(error, data) {
         var attributes = d3.keys(data[0]).filter(function(d, i) { return d !== "labels"; })
         for (var i = 0; i < attributes.length; i++) {
-            $(obj).append('<input type="checkbox" checked="checked" value="checkbox-attribute-'+i+'" id="'+i+'" class="checkbox-attribute" onclick="filter_attribute(this)">'+attributes[i]+'<br>')
+            if(columns_mask[i]) {
+                $(obj).append('<input type="checkbox" checked="checked" value="checkbox-attribute-'+i+'" id="'+i+'" class="checkbox-attribute" onclick="filter_attribute(this)">'+attributes[i]+'<br>')
+            } else {
+                $(obj).append('<input type="checkbox" value="checkbox-attribute-'+i+'" id="'+i+'" class="checkbox-attribute" onclick="filter_attribute(this)">'+attributes[i]+'<br>')
+            }
         }
     });
 }
@@ -23,8 +29,6 @@ function chart_attributes(obj) {
 // Modify the chart using the checkboxes to filter the attributes
 function filter_attribute(obj) {
     var index = +(obj.id)
-    selected_row = -1
-    selected_column = -1
     $(combobox_rows_id).val("-")
     $(combobox_columns_id).val("-")
     if (obj.checked) {
@@ -37,6 +41,9 @@ function filter_attribute(obj) {
         columns_mask[index] = true;
         $(obj).prop('checked', true);
     } else {
+        // reload
+        selected_row = -1
+        selected_column = -1
         d3.select(matrix_id).select("svg").remove("svg");
         chart_scatter_matrix();
         initialize_zoom_comboboxes();

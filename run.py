@@ -14,10 +14,22 @@ Settings
 app = Flask(__name__)
 app.config.from_object(__name__)
 
+DATA_FILE = "static/data/iris.csv"
+
 @app.route('/')
 def index():
-    data_file = "static/data/iris.csv"
-    return render_template('index.html', data_file=data_file)
+    return render_template('index.html', data_file=DATA_FILE)
+
+@app.route('/automatic_filter', methods=['POST'])
+def automatic_filter():
+    algorithm_type = request.form.get('algorithm_type')
+    if algorithm_type == "type1":
+        mask = [True, True, False, True]
+    else:
+        mask = [False, True, False, True]
+    array = [int(x) for x in mask]
+    result = {'result': True, 'msg': str(array)}
+    return jsonify(result)
 
 """
 Run application
@@ -25,6 +37,9 @@ Run application
 if __name__ == '__main__':
     # app.debug = True
     app.run()
+
+# - implementar filter automatico de verdade no lado do server (ler arquivo, processar, retornar array ou erro)
+# - espaco para parametros dos algoritmos no client?
 
 # TODOs:
 # 
