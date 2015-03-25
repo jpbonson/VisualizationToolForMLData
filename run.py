@@ -2,11 +2,13 @@
 # vim:ts=4:sts=4:sw=4:et:wrap:ai:fileencoding=utf-8:
 
 import ast
+import os
 from flask import Flask, jsonify
 from flask import render_template
 from flask import request
 from flask import session, redirect, url_for, escape
 import json
+from app.models.feature_filtering import FeatureFiltering
 
 """
 Settings
@@ -14,7 +16,8 @@ Settings
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-DATA_FILE = "static/data/iris.csv"
+DATA_FILE = "static/data/ecoli.csv"
+FEATURE_FILTERING = FeatureFiltering(app, os.path.dirname(os.path.abspath(__file__))+"/"+DATA_FILE)
 
 @app.route('/')
 def index():
@@ -22,35 +25,35 @@ def index():
 
 @app.route('/automatic_filter', methods=['POST'])
 def automatic_filter():
-    algorithm_type = request.form.get('algorithm_type')
-    if algorithm_type == "type1":
-        mask = [True, True, False, True]
-    else:
-        mask = [False, True, False, True]
+    app.logger.debug("Executing automatic filtering")
+    algorithm_type = request.form.get("algorithm_type")
+    threshold = float(request.form.get("threshold"))
+    mask = FEATURE_FILTERING.run(algorithm_type, threshold)
     array = [int(x) for x in mask]
-    result = {'result': True, 'msg': str(array)}
+    if len(array) == 0:
+        result = {'result': False, 'msg': "The algorithm filtered out all attributes. Choose other parameters or another method."}
+    elif all(x==True for x in mask):
+        result = {'result': False, 'msg': "The algorithm filtered no attributes. Choose other parameters or another method."}
+    else:
+        result = {'result': True, 'msg': str(array)}
     return jsonify(result)
 
 """
 Run application
 """
 if __name__ == '__main__':
-    # app.debug = True
+    app.debug = True
     app.run()
-
-# - implementar filter automatico de verdade no lado do server (ler arquivo, processar, retornar array ou erro)
-# - espaco para parametros dos algoritmos no client?
 
 # TODOs:
 # 
 # Main Task List Summary:
-# - implement automatic filtering + UI adaptation (usar ajax, e achar maneira de passar array entre cliente e server)
-# - fine-tune the histograms for greater zooms
 # - implement the star plot
 # - star plot working with selection
 # - star plot working with filtering
 
 # Optional Task List Summary:
+# - fine-tune the histograms for greater zooms
 # - refatorar CSS para a scatter matrix
 # - option to choose the size of the scatter matrix, so it can be better visualized for datasets with lots of features
 # - option to upload .csv files with datasets to the system

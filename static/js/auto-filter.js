@@ -2,14 +2,17 @@ $(function() {
     // calls server to return a columns_mask using automatic filtering, then update the system
     $('#automatic_filtering').click(function(e) {
         if ($("#filter1").is(':checked')) {
-            var type = "type1"
+            var type = "chi2"
+        } else if ($("#filter2").is(':checked')) {
+            var type = "variance_threshold"
         } else {
-            var type = "type2"
+            var type = "random_forest_classifier"
         }
         e.preventDefault();
         $.post('../automatic_filter', 
             {
-                'algorithm_type': type
+                'algorithm_type': type,
+                'threshold': $("#threshold").val()
             }, 
             function(data) {
             if(data['result']){

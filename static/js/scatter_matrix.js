@@ -1,6 +1,6 @@
 function chart_scatter_matrix() { 
     var obj = matrix_id
-    var width = 650
+    var width = 750
     var padding = 19.5
     var dot_size = 3
 

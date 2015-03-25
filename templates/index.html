@@ -49,15 +49,16 @@
                 <fieldset>
                 <legend><h3>Filter Algorithms:</h3></legend>
                     <form>
-                        <input type="radio" name="auto-filter" id="filter1" value="1" checked>Filter A
+                        Algorithm's Threshold: <input type="number" id="threshold" name="threshold" value="0.1" style="width: 40px;"><br>
+                        <input type="radio" name="auto-filter" id="filter3" value="1" checked>Random Forest Classifier
                         <br>
-                        <input type="radio" name="auto-filter" id="filter2" value="2">Filter B
+                        <input type="radio" name="auto-filter" id="filter1" value="2">Chi-Square Test
+                        <br>
+                        <input type="radio" name="auto-filter" id="filter2" value="3">Variance Threshold
                         <br>
                         <a href="#" id="automatic_filtering" class="button black" style="margin-top: 5px;margin-bottom: 5px;">Automatic Filter</a>
                     </form> 
                 </fieldset>
-
-                <a href="#" class="button black" style="margin-top: 20px;">Upload dataset</a>
             </div>
         </div>
         <div id="content">
