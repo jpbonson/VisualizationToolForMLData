@@ -16,12 +16,20 @@ Settings
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-DATA_FILE = "static/data/ecoli.csv"
+DATA_FILE = "static/data/iris.csv"
 FEATURE_FILTERING = FeatureFiltering(app, os.path.dirname(os.path.abspath(__file__))+"/"+DATA_FILE)
 
 @app.route('/')
 def index():
     return render_template('index.html', data_file=DATA_FILE)
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+@app.route('/test2')
+def test2():
+    return render_template('test2.html')
 
 @app.route('/automatic_filter', methods=['POST'])
 def automatic_filter():

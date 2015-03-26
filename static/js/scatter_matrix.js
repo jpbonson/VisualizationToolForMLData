@@ -1,4 +1,5 @@
 function chart_scatter_matrix() { 
+    // variables
     var obj = matrix_id
     var width = 750
     var padding = 19.5
@@ -68,7 +69,7 @@ function chart_scatter_matrix() {
                 .attr("width", width + padding)
                 .attr("height", width + padding)
             .append("g")
-                .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
+                .attr("transform", "translate(" + padding + "," + padding/2 + ")");
 
         svg.selectAll(".x.axis")
                 .data(data_axis_x)
