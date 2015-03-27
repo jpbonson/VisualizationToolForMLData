@@ -1,4 +1,6 @@
 function chart_scatter_matrix() { 
+    d3.select(matrix_id).select("svg").remove("svg"); // reset
+
     // variables
     var obj = matrix_id
     var width = 750

@@ -44,8 +44,8 @@ function filter_attribute(obj) {
         // reload
         selected_row = -1
         selected_column = -1
-        d3.select(matrix_id).select("svg").remove("svg");
         chart_scatter_matrix();
         initialize_zoom_comboboxes();
+        star_plot();
     }
 }
