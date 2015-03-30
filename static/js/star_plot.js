@@ -1,4 +1,4 @@
-function star_plot() {
+function star_plot(brushed_data) {
     d3.select(star_plot_id).select("svg").remove("svg"); // reset
 
     // variables
@@ -17,6 +17,10 @@ function star_plot() {
     
     // load CSV data and process it
     d3.csv(data_file, function(error, data) {
+        var original_data = data
+        if(typeof brushed_data !== 'undefined') {
+            data = brushed_data
+        };
         var attributes = d3.keys(data[0]).filter(function(d, i) { return d !== "labels" && columns_mask[i]; })
         var classes = data.map(function(d) { return d.labels; }).filter( unique );
         var radians = (2 * Math.PI)/attributes.length
@@ -37,7 +41,7 @@ function star_plot() {
         // get max values per column
         max_values = []
         attributes.forEach(function(k) {
-            max_values.push(round_to_one_decimal(d3.max(data, function(d) { return +d[k] })))
+            max_values.push(round_to_one_decimal(d3.max(original_data, function(d) { return +d[k] })))
         });
 
         // create chart

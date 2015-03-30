@@ -109,30 +109,41 @@ function chart_scatter_matrix() {
 
         cell.filter(function(d) { return d.row !== d.column; }).call(brush);
 
+        /* BRUSH - STARTS */
         var brush_cell;
 
-        // reset the previous brush
+        // reset the previous brush and show star plot for all data
         function brushstart(p) {
-                if (brush_cell !== this) {
-                    d3.select(brush_cell).call(brush.clear());
-                    x.domain(domain_per_attribute[p.attributes_x]);
-                    y.domain(domain_per_attribute[p.attributes_y]);
-                    brush_cell = this;
-                }
+            if (brush_cell !== this) {
+                d3.select(brush_cell).call(brush.clear());
+                x.domain(domain_per_attribute[p.attributes_x]);
+                y.domain(domain_per_attribute[p.attributes_y]);
+                brush_cell = this;
+            }
         }
 
         // highlights the selected data in the scatter plots
         function brushmove(p) {
-                var e = brush.extent();
-                svg.selectAll("circle").classed("hidden", function(d) {
-                    return e[0][0] > d[p.attributes_x] || d[p.attributes_x] > e[1][0] || e[0][1] > d[p.attributes_y] || d[p.attributes_y] > e[1][1];
-                });
+            var e = brush.extent();
+            svg.selectAll("circle").classed("hidden", function(d) {
+                return e[0][0] > d[p.attributes_x] || d[p.attributes_x] > e[1][0] || e[0][1] > d[p.attributes_y] || d[p.attributes_y] > e[1][1];
+            });
+            var brushed_data = data.filter(function(d) {
+                return !(e[0][0] > d[p.attributes_x] || d[p.attributes_x] > e[1][0] || e[0][1] > d[p.attributes_y] || d[p.attributes_y] > e[1][1]);
+            })
+            d3.select(star_plot_id).select("svg").remove("svg"); // WORKAROUND: the reset inside the star_plot() is not working
+            if(brushed_data.length > 0) {   
+                star_plot(brushed_data);
+            } else {
+                star_plot();
+            }
         }
 
         // if there is no brush, select all data (default)
         function brushend() {
             if (brush.empty()) svg.selectAll(".hidden").classed("hidden", false);
         }
+        /* BRUSH - ENDS */
 
         // create the charts inside the matrix
         function plot(chart) {
