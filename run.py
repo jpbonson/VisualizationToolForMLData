@@ -58,7 +58,7 @@ if __name__ == '__main__':
 # - updated the histograms to use stacked bars, so each bar will have the quantity per range and per class
 # - atualizar zoom para ser possivel clicar em uma mini-versao da scatter matrix (?)
 # - fazer star plot funcionar para dados com valores negativos (?)
-# - atualizar README para usar o projeto de portfolio
+# - atualizar README para usar o projeto de portfolio (colocar link do linkedln no pdf do projeto)
 
 # DONE (Main):
 # - implement zooming + UI adaptation

@@ -12,7 +12,8 @@ $(function() {
         $.post('../automatic_filter', 
             {
                 'algorithm_type': type,
-                'threshold': $("#threshold").val()
+                'threshold': $("#threshold").val(),
+                'datafile': data_file
             }, 
             function(data) {
             if(data['result']){
