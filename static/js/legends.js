@@ -1,5 +1,8 @@
 // Add the classes to the legend list
-function chart_legends(obj) {
+function chart_legends() {
+    d3.select(chart_legends_id).select("svg").remove("svg"); // reset
+    
+    var obj = chart_legends_id
     d3.csv(data_file, function(error, data) {
         var classes = data.map(function(d) { return d.labels; }).filter( unique );
 

@@ -20,7 +20,15 @@
             <p>Visualization Tool for Data Classification</p>
         </div>
         <div id="menu">
-            <div style="float: left; width: 160px;">
+            <div>
+                <div style="float: left; width: 80px;position:relative;"><h3>Dataset:</h3></div>
+                <select id="dataset_options" style="margin-top: 15px;width: 150px;" onchange="set_current_dataset()">
+                {% for dataset in datasets %}
+                    <option value="{{dataset}}">{{dataset}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div style="clear: left;float: left; width: 160px;">
             <fieldset>
             <legend><h3>Classes:</h3></legend>
                 <div style="overflow-y: auto;overflow-x: hidden;height: 160px; width: 140px;">
@@ -70,13 +78,18 @@
     </body>
     <script>
         // Global Variables
-        var colors = d3.scale.category10();
-        var data_file = "{{ data_file }}"
+        var filepath = "{{ filepath }}"
+
         var matrix_id = "#scattermatrix"
         var combobox_rows_id = "#zoom_row"
         var combobox_columns_id = "#zoom_column"
         var chart_attributes_id = "#chart-attributes"
         var star_plot_id = "#star-plot"
+        var datasets_options_id = "#dataset_options"
+        var chart_legends_id = "#chart-legends"
+        
+        var data_file = filepath+$(datasets_options_id).val()
+        var colors = d3.scale.category10();
         var columns_mask = initialize_columns_mask()
         var selected_row = -1
         var selected_column = -1
@@ -84,8 +97,23 @@
         // Initialize Dynamic Content
         initialize_zoom_comboboxes()
         chart_scatter_matrix();
-        chart_legends("#chart-legends");
+        chart_legends();
         chart_attributes();
         star_plot();
+
+        function set_current_dataset() {
+            data_file = filepath+$(datasets_options_id).val()
+
+            // reset all GUI
+            colors = d3.scale.category10();
+            columns_mask = initialize_columns_mask()
+            selected_row = -1
+            selected_column = -1
+            initialize_zoom_comboboxes()
+            chart_scatter_matrix();
+            chart_legends();
+            chart_attributes();
+            star_plot();
+        }
     </script>
 </html>
