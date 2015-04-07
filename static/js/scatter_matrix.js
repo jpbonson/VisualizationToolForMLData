@@ -6,11 +6,18 @@ function chart_scatter_matrix() {
     var width = 750
     var padding = 19.5
     var dot_size = 3
+    var num_bars = 5
+    var histogram_vertical_adjustment = 0
 
     // define if a type of zoom is being used
     var use_zoom = false
     var use_partial_row_zoom = false
     var use_partial_column_zoom = false
+    var filter_all_but_one = false
+    if(columns_mask.filter(function(x){return x==true}).length == 1) {
+        filter_all_but_one = true
+    }
+
     if(selected_row !== -1 && selected_column !== -1) {
         use_zoom = true
     } else if(selected_row !== -1) {
@@ -43,7 +50,11 @@ function chart_scatter_matrix() {
         if(use_zoom) {
             data_axis_x = [attributes[selected_column]]
             data_axis_y = [attributes[selected_row]]
+        }
+        if(use_zoom || filter_all_but_one) {
             ticks = 10
+            num_bars = 10
+            histogram_vertical_adjustment = 20
         }
 
         // axis
@@ -174,7 +185,6 @@ function chart_scatter_matrix() {
                         .style("fill", function(d) { return colors(d.labels); });
             } else { // histogram
                 // bars content
-                var num_bars = 5
                 var start = +domain_per_attribute[chart.attributes_x][0]
                 var end = +domain_per_attribute[chart.attributes_x][1]
                 var step = Number(((end - start)/num_bars).toFixed(1));
@@ -262,7 +272,7 @@ function chart_scatter_matrix() {
 
                 bar.append("text")
                         .attr("x", function(d) { return x2(d.x) + 10 ; })
-                        .attr("y", function(d) { return y2(d.y); })
+                        .attr("y", function(d) { return y2(d.y) + histogram_vertical_adjustment; })
                         .attr("dy", ".70em")
                         .text(function(d) { return d.y; })
                         .style("fill", "black")
