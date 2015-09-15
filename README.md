@@ -2,12 +2,14 @@
 
 Visualization tool using Javascript and Python to visualize real-valued data for classification problems.
 
-Features:
-- Visualize real-valued datasets for classification problems (obs.: currently it doesn't support negative values).
-- Charts: Scatter plot, histogram, and star plot.
+#### Features:
+- Visualize real-valued datasets for classification problems
+- Charts: Scatter plot, histogram, and star plot
 - Selection
 - Filter
 - Zoom 
+
+Obs.: Currently it doesn't support negative values.
 
 ### How to Install:
 
