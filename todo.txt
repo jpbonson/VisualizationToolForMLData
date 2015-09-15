@@ -1,0 +1,10 @@
+TODO LIST:
+    New features:
+    - Make zoom feature work with mouse scroll wheel.
+    - Add option to choose the size of the scatter matrix, to improve visualization for datasets with lots of features.
+    - Add filter per class, so the data for some classes could be hidden to remove noise.
+    - Update the histograms to use stacked bars, so each bar will have the quantity per range and per class.
+    - Make star plot work correctly for negative values.
+
+    Code refactoring:
+    - Move the CSS code from the scatter matrix and star plot .js files to the .css files.

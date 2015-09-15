@@ -1,0 +1,17 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdftex 2015.1.25)  9 APR 2015 23:21
+entering extended mode
+**C:/Users/jpbonson/Dropbox/Dalhousie*Winter*2015/Visualization/project/Visuali
+zationToolForMLData/docs/latex/example.bib
+
+("C:/Users/jpbonson/Dropbox/Dalhousie Winter 2015/Visualization/project/Visuali
+zationToolForMLData/docs/latex/example.bib"
+! Undefined control sequence.
+l.4   howpublished = "\url
+                          {http://archive.ics.uci.edu/ml/datasets/Iris}",
+? 
+! Emergency stop.
+l.4   howpublished = "\url
+                          {http://archive.ics.uci.edu/ml/datasets/Iris}",
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!
