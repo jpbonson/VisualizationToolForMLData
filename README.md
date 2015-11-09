@@ -1,35 +1,41 @@
-# VisualizationToolForMLData
-Visualization tool using Python and Javascript for real-valued classification data for Machine Learning problems.
+# Visualization Tool for Machine Learning Data
 
-python "C:\Users\jpbonson\Dropbox\Dalhousie Winter 2015\Visualization\project\VisualizationToolForMLData\run.py"
+Visualization tool using Javascript and Python to visualize real-valued data for classification problems.
+
+#### Features:
+- Visualize real-valued datasets for classification problems
+- Charts: Scatter plot, histogram, and star plot
+- Selection
+- Filter
+- Zoom 
+
+Obs.: Currently it doesn't support negative values.
+
+### How to Install:
+
+First, you must have pip installed:
+```
+sudo apt-get install python-pip
+```
+
+The install the libraries in the requirements file:
+```
+sudo pip install -r requirements.txt
+```
+
+### How to Run:
+```
+python run.py
+```
+### How to Visualize:
 http://127.0.0.1:5000/
 
-# TODO (Optional):
-# - escrever o report
+To add a new dataset, add the .csv file to the folder static/data.
 
-# FUTURE:
-# - zoom funcionar com scroll wheel
-# - option to choose the size of the scatter matrix, so it can be better visualized for datasets with lots of features
-# - filtering feature for classes, so the data for some classes could be hidden to remove noise
-# - updated the histograms to use stacked bars, so each bar will have the quantity per range and per class
-# - fazer star plot funcionar para dados com valores negativos
-# - refatorar CSS para a scatter matrix
-# - refatorar CSS do star plot para ir para o arquivo .css
-# - atualizar README para usar o projeto de portfolio (colocar link do linkedln no pdf do projeto)
+### Examples:
 
-# DONE (Main):
-# - implement zooming + UI adaptation
-# - implement automatic filtering + UI adaptation
-# - implement the star plot (+ selection especifica do star plot)
-# - star plot working with filtering
-# - star plot working with selection in the scatter matrix
+Tool loaded with the Iris dataset:
+![alt tag](https://github.com/jpbonson/VisualizationToolForMLData/blob/master/docs/latex/images/overview2.png)
 
-# DONE (Optional):
-# - fine-tune the histograms for greater zooms
-# - dynamic histograms that change the quantity of bars depending on the zoom
-# - foi tomado cuidado para que a interacao das features entre si nao gerassem bugs (por exemplo, zoom em (0,1) seguido da filtragem da linha 0)
-# - option to upload .csv files with datasets to the system (or select the filename from a list in the folder)
-
-# bugs corrigidos:
-# - o eixo x estava invertido
-# - instabilidade no schema de cores dos charts
+Tool loaded with the Ecoli dataset:
+![alt tag](https://github.com/jpbonson/VisualizationToolForMLData/blob/master/docs/latex/images/overview.png)
